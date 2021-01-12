@@ -1,0 +1,100 @@
+.test{
+    color:blueviolet;
+    text-align: center;
+}
+
+.loginContainer{
+    background-color: cadetblue;
+}
+
+#authSignupBtn{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    /* border-radius: 50%; */
+}
+
+#authLoginBtn{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/**************************/
+/*   Login Compoonent     */
+/**************************/
+
+/* button{
+    height: 75px;
+    width: 75px;
+    border: 5px solid black;
+} */
+
+.btn{
+    height: 75px;
+    width: 75px;
+    border: 2px solid black;
+}
+
+.loginBtn{
+    height: 75px;
+    width: 154px;
+}
+
+.col1{
+    /* background-color: chartreuse; */
+    /* text-align: right; */
+    padding: 2px;
+    /* margin-right: 0; */
+}
+
+.col2{
+    /* background-color: cornflowerblue; */
+    padding: 2px;
+    /* white-space: nowrap; */
+}
+
+.col3{
+    /* background-color: crimson; */
+    /* text-align: left; */
+    padding: 2px;
+}
+
+.loginContainer{
+    background-color: cadetblue; 
+    align-items: center;
+}
+
+.row{
+    align-items: center;
+}
+
+.headerCol{
+    /* background-color: blueviolet; */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#password{
+    /* background-color: chartreuse; */
+    margin-left: 87px;
+}
+
+#backspace{
+    height: 40px;
+    width: 50px;
+}
+
+
+/**************************/
+/*    Signup Compoonent   */
+/**************************/
+
+#cancelBtn{
+    height: 40px;
+    width: 40px;
+    /* padding-right: 2px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px; */
+}
