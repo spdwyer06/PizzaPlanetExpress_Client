@@ -44,8 +44,8 @@ export default class Auth extends Component {
                 <Button id='authSignupBtn' onClick={() => this.toggleSignup()}>Create New User</Button>
                 <br />
                 <Button id='authLoginBtn' onClick={() => this.toggleLogin()}>Employee Login</Button>
-                {this.state.signupOpen == true ? <Signup toggleSignup={this.toggleSignup} /> : <></>}
-                {this.state.loginOpen == true ? <Login updateToken={this.props.updateToken} toggleLogin={this.toggleLogin} loginOpen={this.state.loginOpen} /> : <></>}
+                {this.state.signupOpen == true ? <Signup toggleSignup={this.toggleSignup} signupOpen={this.state.signupOpen} /> : <></>}
+                {this.state.loginOpen == true ? <Login updateToken={this.props.updateToken} updateUser={this.props.updateUser} toggleLogin={this.toggleLogin} loginOpen={this.state.loginOpen} /> : <></>}
             </Modal>
         );
     }

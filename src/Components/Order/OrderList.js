@@ -24,16 +24,20 @@ export default class OrderList extends Component {
     // }
 
     async componentDidMount(){
+        console.log('OrderList Token:', this.props.token);
+
         try{
             const url = `${API_URL}/order/all`;
             const options = {
                 method: 'GET',
                 headers: new Headers({
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': this.props.token
                 })
             };
             
             const allOrders = await fetch(url, options);
+            // console.log(allOrders.status);
             // console.log('allOrders:', allOrders);
             const ordersJson = await allOrders.json();
             // console.log('ordersJson:', ordersJson);

@@ -10,6 +10,10 @@ export default class Navbar extends Component {
             <Nav vertical>
                 <br />
                 <NavItem>
+                    <Button onClick={this.props.logout}>Logout</Button>
+                </NavItem>
+                <br />
+                <NavItem>
                     <Link to='/hours/clockIn'>
                         <Button>Clock In</Button>
                     </Link>

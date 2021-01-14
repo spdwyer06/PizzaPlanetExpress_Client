@@ -33,7 +33,8 @@ export default class MenuItemList extends Component {
             const options = {
                 method: 'GET',
                 headers: new Headers({
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': this.props.token
                 })
             };
             const allItems = await fetch(url, options);
@@ -61,9 +62,9 @@ export default class MenuItemList extends Component {
         return (
             <div>
                 <h1>All Menu Items</h1>
-                <Button onClick={this.toggleCreate}>Add New Menu Item</Button>
+                {this.props.user.isAdmin ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
                 {/* {console.log('State', this.state.menuItems)} */}
-                {this.state.menuItems.map((menuItem, i) => <MenuItem item={menuItem} capName={this.capitalizeName} key={i} />)}
+                {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} capName={this.capitalizeName} key={i} />)}
                 {this.state.createOn ? <MenuItemCreate createOn={this.state.createOn} toggleCreate={this.toggleCreate} /> : <></>}
             </div>
         );

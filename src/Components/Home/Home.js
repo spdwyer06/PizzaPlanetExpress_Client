@@ -10,22 +10,36 @@ import OrderList from '../Order/OrderList';
 import './Home.css';
 
 export default class Home extends Component {
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             
+        }
+    }
+    
+
     render() {
         return (
             <Container fluid>
                 <Router>
                     <Row>
                         <Col sm='3'>
-                            <Navbar />
+                            <Navbar logout={this.props.logout} />
                         </Col>
                         <Col sm='9'>
                             <Switch>
                                 {/* All Menu Items */}
-                                <Route path='/menuItem/all' exact component={MenuItemList} />
+                                <Route path='/menuItem/all' exact>
+                                    <MenuItemList token={this.props.token} user={this.props.user} />
+                                </Route> 
                                 {/* Add Menu Item */}
                                 <Route path='/menuItem/create' exact component={MenuItemCreate} />
                                 {/* All Orders */}
-                                <Route path='/order/all' exact component={OrderList} />
+                                <Route path='/order/all' exact>
+                                    <OrderList token={this.props.token} user={this.props.user} />
+                                </Route>
                             </Switch>
                         </Col>
                     </Row>

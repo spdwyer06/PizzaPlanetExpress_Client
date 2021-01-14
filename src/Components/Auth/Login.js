@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Modal, Form, FormGroup, Label, Container, Row, Col} from 'reactstrap';
+import {Button, Modal, Form, FormGroup, Label, Container, Row, Col, ModalHeader} from 'reactstrap';
 
 import Backspace from './backspace.png';
 import API_URL from '../../env';
@@ -14,8 +14,8 @@ export default class Login extends Component {
         super(props)
     
         this.state = {
-             password: '',
-             loginOpen: false
+            password: '',
+            //  loginOpen: false
         }
     }
     
@@ -46,24 +46,66 @@ export default class Login extends Component {
         }, () => console.log('New Password State:', this.state.password));
     }
 
-    login(){
-        this.props.updateToken();
-        // this.props.loginOpen = false;
-        this.props.toggleLogin();
-        console.log('Login Props', this.props.loginOpen);
+    async login(){
+        const url = `${API_URL}/user/login`;
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({
+                password: this.state.password
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        };
+
+        try{
+            const res = await fetch(url, options);
+            if(res.status != 500){
+                console.log('Went through', res.body);
+                const r = await res.json();
+                const user = r.user;
+                const token = r.token;
+                console.log('User:', user);
+                console.log('Token:', token);
+                // const robj = await res.json();
+                // console.log('robj:', robj);
+                // console.log('Token:', robj.token);
+                await this.props.updateToken(token);
+                await this.props.updateUser(user);
+                this.props.toggleLogin();
+            }
+            else{
+                console.log('Login failed');
+            }
+        }
+        catch(err){
+            console.log('Error:', err.message);
+        }
     }
 
     render(){
         return(
             // <Container className='loginContainer themed-container' fluid='sm'>
             <Modal isOpen={true}>
+                <ModalHeader>
+                    <Container>
+                        <Row>
+                            <Col sm='10'>
+                                <h4 className='test'>Enter Your Password</h4>
+                            </Col>
+                            <Col sm='2'>
+                                <Button onClick={this.props.toggleLogin} color='danger'>X</Button>
+                            </Col>
+                        </Row>
+                    </Container>
+                </ModalHeader>
             <Container className='loginContainer'>
-                <Row>
+                {/* <Row>
                     <Col xs='3'></Col>
                     <Col className='headerCol' xs='auto'>
                         <h4 className='test'>Enter Your Password</h4>
                     </Col>
-                </Row>
+                </Row> */}
                 <Row>
                     <Col xs='3'></Col>
                     <Col className='passInput' xs='auto'>
