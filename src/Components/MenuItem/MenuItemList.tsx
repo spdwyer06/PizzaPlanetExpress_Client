@@ -10,9 +10,22 @@ import MenuItemCreate from './ItemCreate';
 import './MenuItem.css';
 
 
-export default class MenuItemList extends Component {
 
-    constructor(props) {
+type Props = {
+    token: string,
+    user: {
+        isAdmin: boolean
+    }
+};
+
+type State = {
+    menuItems: [],
+    createOn: boolean
+};
+
+export default class MenuItemList extends Component<Props, State> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {
@@ -55,7 +68,7 @@ export default class MenuItemList extends Component {
         this.setState({createOn: !this.state.createOn});
     }
 
-    capitalizeName = (name) => name[0].toUpperCase() + name.slice(1);
+    capitalizeName = (name: string) => name[0].toUpperCase() + name.slice(1);
 
     render() {
 

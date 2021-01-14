@@ -8,9 +8,24 @@ import './MenuItem.css';
 
 
 
-export default class MenuItem extends Component {
+type Props = {
+    user: {isAdmin: boolean},
+    token: string,
+    item: {
+        id: number,
+        name: string,
+        price: number
+    },
+    capName: (name: string) => string,
+};
 
-    constructor(props) {
+type State = {
+    editOn: boolean
+};
+
+export default class MenuItem extends Component<Props, State> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {
