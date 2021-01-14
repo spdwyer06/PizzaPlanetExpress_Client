@@ -8,9 +8,19 @@ import './Auth.css';
 
 
 
-export default class Auth extends Component {
+type Props = {
+    updateToken: (token: string) => void,
+    updateUser: (user: object) => void 
+};
 
-    constructor(props) {
+type State = {
+    signupOpen: boolean,
+    loginOpen: boolean
+};
+
+export default class Auth extends Component<Props, State> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {
@@ -23,12 +33,12 @@ export default class Auth extends Component {
         this.toggleSignup = this.toggleSignup.bind(this);
     }
     
-    toggleSignup(){
+    toggleSignup(): void{
         // this.state.signupOpen == true ? this.setState({signupOpen: false}) : this.setState({signupOpen: true});
         this.setState({signupOpen: !this.state.signupOpen});
     }
 
-    toggleLogin(){
+    toggleLogin(): void{
         this.setState({loginOpen: !this.state.loginOpen})
         // if(this.state.loginOpen == true){
         //     this.setState({loginOpen: false});

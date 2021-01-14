@@ -7,9 +7,20 @@ import './Auth.css';
 
 
 
-export class Signup extends Component {
+type Props = {
+    toggleSignup: () => void,
+    signupOpen: boolean
+};
 
-    constructor(props) {
+type State = {
+    firstName: string,
+    lastName: string,
+    password: number | null
+};
+
+export class Signup extends Component<Props, State> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {
@@ -19,7 +30,7 @@ export class Signup extends Component {
         }
     }
     
-    async createUser(e){
+    async createUser(e: React.FormEvent){
         e.preventDefault();
         // console.log('Form Submitted');
         // console.log('First Name State:', this.state.firstName);
@@ -39,11 +50,17 @@ export class Signup extends Component {
         };
 
         try{
-            await fetch(url, options);
-            // const res = await fetch(url, options);
-            // const r = res.json();
-            // console.log(r);
-            this.props.toggleSignup();
+            // await fetch(url, options);
+            const res = await fetch(url, options);
+            if(res.status != 500){
+                this.props.toggleSignup();
+            }
+            else{
+                const r = await res.json();
+                // console.log('Error', r);
+                // console.log('Error 2', r.Error);
+                console.log('Error:', r.Error.errors[0].message);
+            }
         }
         catch(err){
             console.log('Error:', err.message);
@@ -72,7 +89,7 @@ export class Signup extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for='password'>Password:</Label>  
-                        <Input name='password' id='passwordInput' onChange={e => this.setState({password: e.target.value})} required />
+                        <Input name='password' id='passwordInput' onChange={e => this.setState({password: parseInt(e.target.value)})} required />
                     </FormGroup>
                     <Button type='submit'>Create User</Button>
                 </Form>
