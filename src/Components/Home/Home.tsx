@@ -14,7 +14,9 @@ import './Home.css';
 type Props = {
     logout: () => void,
     token: string,
-    user: {}
+    user: {
+        isAdmin: boolean
+    }
 }
 
 export default class Home extends Component<Props, {}> {

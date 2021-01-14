@@ -8,9 +8,14 @@ import './Auth.css';
 
 
 
+type UserModel = {
+    isManager: boolean,
+    isAdmin: boolean
+  };
+
 type Props = {
     updateToken: (token: string) => void,
-    updateUser: (user: object) => void 
+    updateUser: (user: UserModel) => void 
 };
 
 type State = {

@@ -7,9 +7,20 @@ import API_URL from './env';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+
+
+type UserModel = {
+  isManager: boolean,
+  isAdmin: boolean
+};
+
 type State = {
   sessionToken: string,
-  user: object
+  user: UserModel
+  // user: {
+  //   isManager: boolean,
+  //   isAdmin: boolean
+  // } 
   // sessionToken: Storage
 }
 
@@ -20,7 +31,11 @@ class App extends Component<{}, State> {
   
     this.state = {
       sessionToken: '',
-      user: {}
+      // user: {}
+      user: {
+        isManager: false,
+        isAdmin: false
+      }
     }
 
     this.updateToken = this.updateToken.bind(this);
@@ -89,7 +104,7 @@ class App extends Component<{}, State> {
     });
   }
 
-  updateUser(user: object): void{
+  updateUser(user: UserModel): void{
     this.setState({
       user: user
     });
@@ -99,7 +114,10 @@ class App extends Component<{}, State> {
     localStorage.clear();
     this.setState({
       sessionToken: '',
-      user: {}
+      user: {
+        isManager: false,
+        isAdmin: false
+      }
     });
   }
 
