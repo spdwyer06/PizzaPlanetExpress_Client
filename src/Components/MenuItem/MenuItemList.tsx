@@ -8,6 +8,7 @@ import MenuItemEdit from './ItemEdit';
 import MenuItemCreate from './ItemCreate';
 
 import './MenuItem.css';
+import { Console } from 'console';
 
 
 
@@ -20,7 +21,8 @@ type Props = {
 
 type State = {
     menuItems: [],
-    createOn: boolean
+    createOn: boolean,
+    count: number
 };
 
 export default class MenuItemList extends Component<Props, State> {
@@ -30,15 +32,29 @@ export default class MenuItemList extends Component<Props, State> {
     
         this.state = {
             menuItems: [],
-            createOn: false
+            createOn: false,
+            count: 0
         }
 
         this.toggleCreate = this.toggleCreate.bind(this);
+        this.mapItems = this.mapItems.bind(this);
     }
 
-    componentDidMount(){
-        this.mapItems();
+    async componentDidMount(){
+        console.log('Menu Item List Count Start:', this.state.count);
+        console.log('Menu Item List User:', this.props.user);
+        await this.mapItems();
+        console.log('Menu Item List Count End:', this.state.count);
     }
+
+    // componentDidUpdate(prevProps: Props, prevState: State){
+    //     console.log('Running MenuItemList .componentDidUpdate()');
+    //     if(prevState.menuItems != this.state.menuItems){
+    //         console.log('Stuff has changed');
+    //         // this.mapItems();
+    //     }
+    //     // this.mapItems();
+    // }
     
     async mapItems(){
         try{
@@ -57,15 +73,21 @@ export default class MenuItemList extends Component<Props, State> {
             // console.log('First Item Name 2:', menuItems[0].name);
             // console.log('First Item Price 2:', menuItems[0].price);
     
-            this.setState({menuItems: menuItems});
+            // this.setState({menuItems: menuItems});
+
+            this.setState({
+                menuItems: menuItems,
+                count: menuItems.length
+            });
         }
         catch(err){
-            console.log('Error:', err.message);
+            console.log('Map Error:', err.message);
         }
     }
 
     toggleCreate(){
         this.setState({createOn: !this.state.createOn});
+        !this.state.createOn ? this.mapItems() : <></>;
     }
 
     capitalizeName = (name: string) => name[0].toUpperCase() + name.slice(1);
@@ -77,8 +99,8 @@ export default class MenuItemList extends Component<Props, State> {
                 <h1>All Menu Items</h1>
                 {this.props.user.isAdmin ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
                 {/* {console.log('State', this.state.menuItems)} */}
-                {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} capName={this.capitalizeName} key={i} />)}
-                {this.state.createOn ? <MenuItemCreate createOn={this.state.createOn} toggleCreate={this.toggleCreate} /> : <></>}
+                {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} capName={this.capitalizeName} key={i} refreshMenu={this.mapItems} />)}
+                {this.state.createOn ? <MenuItemCreate user={this.props.user} token={this.props.token} createOn={this.state.createOn} toggleCreate={this.toggleCreate} /> : <></>}
             </div>
         );
     }

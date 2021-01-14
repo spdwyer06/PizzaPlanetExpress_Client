@@ -17,6 +17,7 @@ type Props = {
         price: number
     },
     capName: (name: string) => string,
+    refreshMenu: () => void
 };
 
 type State = {
@@ -35,8 +36,9 @@ export default class MenuItem extends Component<Props, State> {
         this.toggleEdit = this.toggleEdit.bind(this);
     }
 
-    toggleEdit(){
-        this.setState({editOn: !this.state.editOn});
+    async toggleEdit(){
+        await this.setState({editOn: !this.state.editOn});
+        // !this.state.editOn ? this.props.refreshMenu() : <></>;
     }
     
 
@@ -50,7 +52,8 @@ export default class MenuItem extends Component<Props, State> {
                     <h3>${this.props.item.price}</h3>
                     {this.props.user.isAdmin ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>}
                     <Button>Add To Order</Button>
-                    {this.state.editOn ? <MenuItemEdit toggleEdit={this.toggleEdit} item={this.props.item} editOn={this.state.editOn} /> : null}
+                    {console.log('Menu Item Token:', this.props.token)}
+                    {this.state.editOn ? <MenuItemEdit refreshMenu={this.props.refreshMenu} token={this.props.token} toggleEdit={this.toggleEdit} item={this.props.item} editOn={this.state.editOn} /> : null}
                 </div>
 
             //     <Switch>

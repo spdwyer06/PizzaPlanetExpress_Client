@@ -47,10 +47,16 @@ export default class Login extends Component<Props, State> {
         let passBox = document.getElementById('password');
         // passBox.innerText += e.target.value;
         (passBox as HTMLInputElement).innerText += value;
+
+        // this.setState((state, value) => ({
+        //     password: state.password + value
+        // }))
+
         this.setState({
             // password: this.state.password + e.target.value
             password: this.state.password + value
         }, () => console.log('Password State:', this.state.password));
+
         // if(this.state.password.length == 3){
         //     const numBtns = Array.from(document.querySelectorAll('button'));
         //     console.log('Num Btns:', numBtns.length);
