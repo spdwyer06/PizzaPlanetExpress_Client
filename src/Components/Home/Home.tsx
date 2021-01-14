@@ -9,9 +9,17 @@ import OrderList from '../Order/OrderList';
 
 import './Home.css';
 
-export default class Home extends Component {
 
-    constructor(props) {
+
+type Props = {
+    logout: () => void,
+    token: string,
+    user: {}
+}
+
+export default class Home extends Component<Props, {}> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {

@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 type State = {
-  sessionToken: string | null,
+  sessionToken: string,
   user: object
   // sessionToken: Storage
 }
@@ -39,7 +39,8 @@ class App extends Component<{}, State> {
       if(localStorage.getItem('token')){
         // const user = 
         this.setState({
-          sessionToken: localStorage.getItem('token')
+          // Casting as string
+          sessionToken: (localStorage.getItem('token') as string)
         });
       }
       // else if(localStorage.getItem('user')){
@@ -110,7 +111,7 @@ class App extends Component<{}, State> {
         {/* {this.isLoggedIn()} */}
         {/* {this.state.sessionToken === '' || null ? <Login updateToken={this.updateToken} /> : <button onClick={() => this.logOut()}>Log Out</button>} */}
         {/* <Auth updateToken={this.updateToken} /> */}
-        {this.state.sessionToken === '' || null || undefined ? <Auth updateUser={this.updateUser} updateToken={this.updateToken} /> : <Home token={this.state.sessionToken} user={this.state.user} logout={this.logOut} />}
+        {this.state.sessionToken === '' ? <Auth updateUser={this.updateUser} updateToken={this.updateToken} /> : <Home token={this.state.sessionToken} user={this.state.user} logout={this.logOut} />}
         {/* <Home /> */}
 
         {/* <MenuItemHome /> */}

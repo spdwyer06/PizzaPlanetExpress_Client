@@ -4,7 +4,23 @@ import {Link} from 'react-router-dom';
 
 import './Home.css';
 
-export default class Navbar extends Component {
+
+
+type Props = {
+    logout: () => void
+};
+
+export default class Navbar extends Component<Props, {}> {
+
+    constructor(props: Props) {
+        super(props)
+    
+        this.state = {
+             
+        }
+    }
+    
+
     render() {
         return (
             <Nav vertical>
