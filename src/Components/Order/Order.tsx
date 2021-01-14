@@ -5,9 +5,51 @@ import OrderDetail from './OrderDetail';
 import OrderEdit from './OrderEdit';
 
 
-export default class Order extends Component {
 
-    constructor(props) {
+type MenuItemModel = {
+    name: string,
+    price: number,
+    orderItem: {
+        quantity: number
+    }
+}
+
+type OrderModel = {
+    id: number,
+    user: {
+        firstName: string,
+        lastName: string
+    },
+    customer: {
+        firstName: string,
+        lastName: string,
+        phoneNumber: number
+    },
+    orderTime: Date,
+    menuItems: [MenuItemModel],
+    totalPrice: number,
+    isPaid: boolean
+}    
+
+type Props = {
+    // order: {
+    //     customer: {
+    //         firstName: string,
+    //         lastName: string
+    //     },
+    //     totalPrice: number
+    // }
+    order: OrderModel
+};
+
+type State = {
+    orderInfoOn: boolean,
+    orderEditOn: boolean
+};
+
+export default class Order extends Component<Props, State> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {

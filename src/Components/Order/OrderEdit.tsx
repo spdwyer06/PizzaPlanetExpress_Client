@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from "reactstrap";
 
-export default class OrderEdit extends Component {
 
-    constructor(props) {
+
+type Props = {
+    toggleEdit: () => void,
+    orderEditOn: boolean,
+    order: {}
+};
+
+export default class OrderEdit extends Component<Props> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {

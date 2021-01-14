@@ -6,9 +6,19 @@ import Order from './Order';
 
 
 
-export default class OrderList extends Component {
+type Props = {
+    token: string,
+    user: {}
+};
 
-    constructor(props) {
+type State = {
+    orders: [],
+    orderCreateOn: boolean
+};
+
+export default class OrderList extends Component<Props, State> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {

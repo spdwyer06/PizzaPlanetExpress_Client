@@ -3,9 +3,41 @@ import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, M
 
 
 
-export default class OrderDetail extends Component {
+type MenuItemModel = {
+    name: string,
+    price: number,
+    orderItem: {
+        quantity: number
+    }
+}
 
-    constructor(props) {
+type OrderModel = {
+    id: number,
+    user: {
+        firstName: string,
+        lastName: string
+    },
+    customer: {
+        firstName: string,
+        lastName: string,
+        phoneNumber: number
+    },
+    orderTime: Date,
+    menuItems: [MenuItemModel],
+    totalPrice: number,
+    isPaid: boolean
+};
+
+type Props = {
+    toggleInfo: () => void,
+    toggleEdit: () => void,
+    orderInfoOn: boolean,
+    order: OrderModel
+};
+
+export default class OrderDetail extends Component<Props> {
+
+    constructor(props: Props) {
         super(props)
     
         this.state = {
@@ -13,7 +45,7 @@ export default class OrderDetail extends Component {
         }
     }
     
-    mapOrderDetail(order){
+    mapOrderDetail(order: OrderModel){
         console.log('mapOrderDetail():', order);
         order.menuItems.map((menuItem, i) => {
 
@@ -38,12 +70,12 @@ export default class OrderDetail extends Component {
         });
     }
 
-    getOrderDate = (order) => order.orderTime.slice(0, 10);
+    getOrderDate = (order: OrderModel) => (order.orderTime).toString().slice(0, 10);
 
-    getOrderTime = (order) => order.orderTime.slice(11);
+    getOrderTime = (order: OrderModel) => (order.orderTime).toString().slice(11);
 
-    formatPhoneNumber(order){
-        const number = order.customer.phoneNumber.split('');
+    formatPhoneNumber(order: OrderModel){
+        const number = (order.customer.phoneNumber).toString().split('');
         const areaCode = number.splice(0, 3).join('');
         const firstThree = number.splice(0, 3).join('');
         const finalFour = number.join('');
