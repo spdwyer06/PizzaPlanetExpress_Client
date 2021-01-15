@@ -6,9 +6,14 @@ import Order from './Order';
 
 
 
+type UserModel = {
+    isManager: boolean,
+    isAdmin: boolean
+};
+
 type Props = {
     token: string,
-    user: {}
+    user: UserModel
 };
 
 type State = {
@@ -27,13 +32,10 @@ export default class OrderList extends Component<Props, State> {
         }
 
         this.toggleOrderCreate = this.toggleOrderCreate.bind(this);
+        this.mapOrders = this.mapOrders.bind(this);
     }
 
-    // componentDidMount(){
-    //     this.mapOrders();
-    // }
-
-    async componentDidMount(){
+    async mapOrders(){
         console.log('OrderList Token:', this.props.token);
 
         try{
@@ -61,6 +63,38 @@ export default class OrderList extends Component<Props, State> {
         }
     }
 
+    componentDidMount(){
+        this.mapOrders();
+    }
+
+    // async componentDidMount(){
+    //     console.log('OrderList Token:', this.props.token);
+
+    //     try{
+    //         const url = `${API_URL}/order/all`;
+    //         const options = {
+    //             method: 'GET',
+    //             headers: new Headers({
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': this.props.token
+    //             })
+    //         };
+            
+    //         const allOrders = await fetch(url, options);
+    //         // console.log(allOrders.status);
+    //         // console.log('allOrders:', allOrders);
+    //         const ordersJson = await allOrders.json();
+    //         // console.log('ordersJson:', ordersJson);
+    //         const orders = ordersJson.Orders;
+    //         // console.log('orders:', orders);
+            
+    //         this.setState({orders: orders});
+    //     }
+    //     catch(err){
+    //         console.log('Error', err.message);
+    //     }
+    // }
+
     toggleOrderCreate = () => this.setState({orderCreateOn: !this.state.orderCreateOn});
     
     render() {
@@ -68,7 +102,7 @@ export default class OrderList extends Component<Props, State> {
             <div>
                 <h1>All Orders</h1>
                 <Button onClick={this.toggleOrderCreate}>Create New Order</Button>
-                {this.state.orders.map((order, i) => <Order order={order} key={i} />)}
+                {this.state.orders.map((order, i) => <Order token={this.props.token} user={this.props.user} order={order} key={i} mapOrders={this.mapOrders} />)}
                 {/* {console.log('Order List State:', this.state.orders)} */}
             </div>
         );

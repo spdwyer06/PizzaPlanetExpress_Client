@@ -111,7 +111,7 @@ export default class ItemEdit extends Component<Props, State> {
                         </FormGroup>
                         <FormGroup>
                             <Label for='itemPrice'>Menu Item Price:</Label>
-                            <Input name='item{rice' id='itemPriceInput' required placeholder={(this.props.item.price).toString()} onChange={e => this.setState({updatedPrice: parseInt(e.target.value)})} />
+                            <Input name='itemPrice' id='itemPriceInput' required placeholder={(this.props.item.price).toString()} onChange={e => this.setState({updatedPrice: parseInt(e.target.value)})} />
                         </FormGroup>
                     {/* </Form> */}
                 </ModalBody>

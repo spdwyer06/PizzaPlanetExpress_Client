@@ -6,17 +6,21 @@ import Navbar from './Navbar';
 import MenuItemList from '../MenuItem/MenuItemList';
 import MenuItemCreate from '../MenuItem/ItemCreate';
 import OrderList from '../Order/OrderList';
+import OrderCreate from '../Order/OrderCreate';
 
 import './Home.css';
 
 
 
+type UserModel = {
+    isManager: boolean,
+    isAdmin: boolean
+};
+
 type Props = {
     logout: () => void,
     token: string,
-    user: {
-        isAdmin: boolean
-    }
+    user: UserModel
 }
 
 export default class Home extends Component<Props, {}> {
@@ -46,6 +50,11 @@ export default class Home extends Component<Props, {}> {
                                 </Route> 
                                 {/* Add Menu Item */}
                                 <Route path='/menuItem/create' exact component={MenuItemCreate} />
+                                {/* Create Order */}
+                                <Route path='/order/create' exact>
+                                    {/* <OrderCreate token={this.props.token} user={this.props.user} /> */}
+                                    <OrderCreate token={this.props.token} />
+                                </Route>
                                 {/* All Orders */}
                                 <Route path='/order/all' exact>
                                     <OrderList token={this.props.token} user={this.props.user} />

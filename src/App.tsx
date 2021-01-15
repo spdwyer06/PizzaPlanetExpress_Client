@@ -4,6 +4,8 @@ import Auth from './Components/Auth/Auth';
 import Home from './Components/Home/Home';
 import API_URL from './env';
 
+// import UserModel from './Components/Models/UserModel';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 

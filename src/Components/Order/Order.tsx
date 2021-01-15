@@ -3,8 +3,14 @@ import {Button} from 'reactstrap';
 
 import OrderDetail from './OrderDetail';
 import OrderEdit from './OrderEdit';
+import API_URL from '../../env';
 
 
+
+type UserModel = {
+    isManager: boolean,
+    isAdmin: boolean
+};
 
 type MenuItemModel = {
     name: string,
@@ -39,7 +45,10 @@ type Props = {
     //     },
     //     totalPrice: number
     // }
-    order: OrderModel
+    order: OrderModel,
+    user: UserModel,
+    token: string,
+    mapOrders: () => void
 };
 
 type State = {
@@ -65,6 +74,26 @@ export default class Order extends Component<Props, State> {
 
     toggleOrderEdit = () => this.setState({orderEditOn: !this.state.orderEditOn});
 
+    async deleteOrder(e: React.MouseEvent){
+        try{
+            // console.log('Delete Order:', this.props.order.id);
+            const url = `${API_URL}/order/${this.props.order.id}`;
+            const options = {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': this.props.token
+                })
+            };
+
+            await fetch(url, options);
+            this.props.mapOrders();
+        }
+        catch(err){
+            console.log('Error:', err.message);
+        }
+    }
+
     render() {
         // Prop Destructuring
         const {order} = this.props;
@@ -74,8 +103,9 @@ export default class Order extends Component<Props, State> {
                 {/* {console.log('Props In Order Comp:', this.props.order)} */}
                 <h3>Customer Name: {order.customer.lastName}, {order.customer.firstName}</h3>
                 <h3>Order Price: {order.totalPrice}</h3>
+                {this.props.user.isManager || this.props.user.isAdmin ? <Button onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null}
                 <Button onClick={this.toggleOrderInfo}>View</Button>
-                {this.state.orderInfoOn ? <OrderDetail toggleInfo={this.toggleOrderInfo} toggleEdit={this.toggleOrderEdit} orderInfoOn={this.state.orderInfoOn} order={order} /> : null}
+                {this.state.orderInfoOn ? <OrderDetail token={this.props.token} mapOrders={this.props.mapOrders} toggleInfo={this.toggleOrderInfo} toggleEdit={this.toggleOrderEdit} orderInfoOn={this.state.orderInfoOn} order={order} /> : null}
                 {this.state.orderEditOn ? <OrderEdit toggleEdit={this.toggleOrderEdit} orderEditOn={this.state.orderEditOn} order={order} /> : null}
             </div>
         );

@@ -29,7 +29,7 @@ export default class Navbar extends Component<Props, {}> {
                     <Button onClick={this.props.logout}>Logout</Button>
                 </NavItem>
                 <br />
-                <NavItem>
+                {/* <NavItem>
                     <Link to='/hours/clockIn'>
                         <Button>Clock In</Button>
                     </Link>
@@ -42,7 +42,7 @@ export default class Navbar extends Component<Props, {}> {
                 </NavItem>
                 <br />
                 <NavItem>
-                    {/* Get All Hours By User Id */}
+                    Get All Hours By User Id
                     <Link to='/hours/myHours'>
                         <Button>View Your Hours</Button>
                     </Link>
@@ -53,7 +53,7 @@ export default class Navbar extends Component<Props, {}> {
                         <Button>View All Hours</Button>
                     </Link>
                 </NavItem>
-                <br />
+                <br /> */}
                 <NavItem>
                     <Link to='/order/create'>
                         <Button>Start A New Order</Button>

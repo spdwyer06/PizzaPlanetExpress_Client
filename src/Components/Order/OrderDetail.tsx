@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from "reactstrap";
 
+import API_URL from '../../env';
+
 
 
 type MenuItemModel = {
@@ -32,7 +34,9 @@ type Props = {
     toggleInfo: () => void,
     toggleEdit: () => void,
     orderInfoOn: boolean,
-    order: OrderModel
+    order: OrderModel,
+    token: string,
+    mapOrders: () => void
 };
 
 export default class OrderDetail extends Component<Props> {
@@ -86,6 +90,30 @@ export default class OrderDetail extends Component<Props> {
     editOrder(){
         this.props.toggleEdit();
         this.props.toggleInfo();
+    }
+
+    async payOrder(e: React.MouseEvent){
+        try{
+            const url = `${API_URL}/order/${this.props.order.id}`;
+            const options = {
+                method: 'PUT',
+                body: JSON.stringify({
+                    // isPaid: !this.props.order.isPaid
+                    isPaid: true
+                }),
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': this.props.token
+                })
+            };
+
+            await fetch(url, options);
+            this.props.mapOrders();
+            this.props.toggleInfo();
+        }
+        catch(err){
+            console.log('Error:', err.message);
+        }
     }
 
     render() {
@@ -160,7 +188,8 @@ export default class OrderDetail extends Component<Props> {
                     </Container>
                 </ModalBody>
                 <ModalFooter>
-                    <Button>Pay For Order</Button>
+                    <Button onClick={(e) => this.payOrder(e)}>Pay For Order</Button>
+                    {/* <Button onClick={() => order.isPaid == !order.isPaid}>Pay For Order</Button> */}
                     <Button color='primary' onClick={() => this.editOrder()}>Add To Order</Button>
                     {/* <Button color='primary' onClick={this.props.toggleEdit}>Edit Order</Button> */}
                 </ModalFooter>
