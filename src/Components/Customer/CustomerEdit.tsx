@@ -117,7 +117,7 @@ export default class CustomerEdit extends Component<Props, State> {
                 </ModalBody>
                 <ModalFooter>
                     <Button type='submit'>Done</Button>
-                    <Button color='danger' onClick={(e) => this.removeCustomer(e)}>Remove Customer From System</Button>
+                    {localStorage.getItem('userRole') == 'manager' || localStorage.getItem('userRole') == 'admin' ? <Button color='danger' onClick={(e) => this.removeCustomer(e)}>Remove Customer From System</Button> : null}
                 </ModalFooter>
                 </Form>
             </Modal>

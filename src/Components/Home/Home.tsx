@@ -7,8 +7,12 @@ import MenuItemList from '../MenuItem/MenuItemList';
 import MenuItemCreate from '../MenuItem/ItemCreate';
 import OrderList from '../Order/OrderList';
 import OrderCreate from '../Order/OrderCreate';
+import CustomerList from '../Customer/CustomerList';
+
+import MenuItemModel from '../Models/MenuItemModel';
 
 import './Home.css';
+import CustomerModel from '../Models/CustomerModel';
 
 
 
@@ -23,16 +27,25 @@ type Props = {
     user: UserModel
 }
 
-export default class Home extends Component<Props, {}> {
+type State = {
+    testArr: MenuItemModel[],
+    orderId: number
+}
+
+export default class Home extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
     
         this.state = {
-             
+            testArr: [],
+            orderId: 0
         }
     }
     
+    updateOrderItems = (item: MenuItemModel) => console.log('MAY HAVE MESSED THIS UP');
+
+    updateCustomer = (customer: CustomerModel) => console.log('Blarg:', window.location.href);
 
     render() {
         return (
@@ -44,21 +57,25 @@ export default class Home extends Component<Props, {}> {
                         </Col>
                         <Col sm='9'>
                             <Switch>
-                                {/* All Menu Items */}
-                                <Route path='/menuItem/all' exact>
-                                    <MenuItemList token={this.props.token} user={this.props.user} />
-                                </Route> 
-                                {/* Add Menu Item */}
-                                <Route path='/menuItem/create' exact component={MenuItemCreate} />
+                                {/* All Customers */}
+                                <Route path='/customer/all' exact>
+                                    <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} />
+                                </Route>
                                 {/* Create Order */}
                                 <Route path='/order/create' exact>
-                                    {/* <OrderCreate token={this.props.token} user={this.props.user} /> */}
-                                    <OrderCreate token={this.props.token} />
+                                    <OrderCreate token={this.props.token} user={this.props.user} />
+                                    {/* <OrderCreate token={this.props.token} /> */}
                                 </Route>
                                 {/* All Orders */}
                                 <Route path='/order/all' exact>
                                     <OrderList token={this.props.token} user={this.props.user} />
                                 </Route>
+                                {/* All Menu Items */}
+                                <Route path='/menuItem/all' exact>
+                                    <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} orderItems={this.state.testArr} updateOrderItems={this.updateOrderItems} />
+                                </Route> 
+                                {/* Add Menu Item */}
+                                <Route path='/menuItem/create' exact component={MenuItemCreate} />
                             </Switch>
                         </Col>
                     </Row>

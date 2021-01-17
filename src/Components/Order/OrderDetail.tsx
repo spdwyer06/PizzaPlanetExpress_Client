@@ -1,41 +1,48 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from "reactstrap";
+import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
 
 import API_URL from '../../env';
+import MenuItemList from '../MenuItem/MenuItemList';
+
+import OrderModel from '../Models/OrderModel';
+import UserModel from '../Models/UserModel';
+import MenuItemModel from '../Models/MenuItemModel';
 
 
 
-type MenuItemModel = {
-    name: string,
-    price: number,
-    orderItem: {
-        quantity: number
-    }
-}
+// type MenuItemModel = {
+//     name: string,
+//     price: number,
+//     orderItem: {
+//         quantity: number
+//     }
+// }
 
-type OrderModel = {
-    id: number,
-    user: {
-        firstName: string,
-        lastName: string
-    },
-    customer: {
-        firstName: string,
-        lastName: string,
-        phoneNumber: number
-    },
-    orderTime: Date,
-    menuItems: [MenuItemModel],
-    totalPrice: number,
-    isPaid: boolean
-};
+// type OrderModel = {
+//     id: number,
+//     user: {
+//         firstName: string,
+//         lastName: string
+//     },
+//     customer: {
+//         firstName: string,
+//         lastName: string,
+//         phoneNumber: number
+//     },
+//     orderTime: Date,
+//     menuItems: [MenuItemModel],
+//     totalPrice: number,
+//     isPaid: boolean
+// };
 
 type Props = {
     toggleInfo: () => void,
-    toggleEdit: () => void,
+    // toggleEdit: () => void,
     orderInfoOn: boolean,
     order: OrderModel,
     token: string,
+    user: UserModel,
     mapOrders: () => void
 };
 
@@ -87,9 +94,18 @@ export default class OrderDetail extends Component<Props> {
         return `(${areaCode}) ${firstThree}-${finalFour}`;
     }
 
-    editOrder(){
-        this.props.toggleEdit();
-        this.props.toggleInfo();
+    updateOrderItems = (item: MenuItemModel) => console.log('Hazaah from OrderDetail');
+
+    async addToOrder(){
+        // this.props.toggleEdit();
+        // this.props.toggleInfo();
+        // window.location.href == '/menuItem/all';
+        console.log('addToOrder() in OrderDetail');
+        <Switch>
+            <Route path='/order/add' exact>
+                <MenuItemList token={this.props.token} user={this.props.user} orderId={this.props.order.id} orderItems={this.props.order.menuItems} updateOrderItems={this.updateOrderItems} />
+            </Route> 
+        </Switch>
     }
 
     async payOrder(e: React.MouseEvent){
@@ -120,83 +136,184 @@ export default class OrderDetail extends Component<Props> {
         const {order} = this.props;
         console.log('Order Prop:', order);
 
-        return (
-            <Modal isOpen={this.props.orderInfoOn}>
-                {console.log('Order Prop:', order)}
-                <ModalHeader>
-                    <Container>
-                        <Row>
-                            <Col sm='10'>
-                                <h3>Order Detail</h3>
-                            </Col>
-                            <Col sm='2'>
-                                <Button onClick={this.props.toggleInfo} color='danger'>X</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalHeader>
-                <ModalBody>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <h3>Order Id: {order.id}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Date Order Taken: {this.getOrderDate(order)}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Order Taken At: {this.getOrderTime(order)}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Order Taken By: {order.user.firstName} {order.user.lastName}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Customer: {order.customer.firstName} {order.customer.lastName}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h6>Phone Number: {this.formatPhoneNumber(order)}</h6>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Order Detail:</h3>
-                            </Col>
-                        </Row>
-                        {/* {order.menuItems.forEach(menuItem => <h6>{menuItem.name}</h6>)} */}
-                        {this.mapOrderDetail(order)}
-                        <Row>
-                            <Col>
-                                <h3>Order Total: ${order.totalPrice}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Paid For? {order.isPaid}</h3>
-                                {console.log('Order Paid?', order.isPaid)}
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalBody>
-                <ModalFooter>
-                    <Button onClick={(e) => this.payOrder(e)}>Pay For Order</Button>
-                    {/* <Button onClick={() => order.isPaid == !order.isPaid}>Pay For Order</Button> */}
-                    <Button color='primary' onClick={() => this.editOrder()}>Add To Order</Button>
-                    {/* <Button color='primary' onClick={this.props.toggleEdit}>Edit Order</Button> */}
-                </ModalFooter>
-                {/* {order.menuItems.map((menuItem, i) => {
-                    <h6>{menuItem.name}</h6>
-                })} */}
-            </Modal>
+        // return (
+        //     <Modal isOpen={this.props.orderInfoOn}>
+        //         {console.log('Order Prop:', order)}
+        //         <ModalHeader>
+        //             <Container>
+        //                 <Row>
+        //                     <Col sm='10'>
+        //                         <h3>Order Detail</h3>
+        //                     </Col>
+        //                     <Col sm='2'>
+        //                         <Button onClick={this.props.toggleInfo} color='danger'>X</Button>
+        //                     </Col>
+        //                 </Row>
+        //             </Container>
+        //         </ModalHeader>
+        //         <ModalBody>
+        //             <Container>
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Order Id: {order.id}</h3>
+        //                     </Col>
+        //                 </Row>
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Date Order Taken: {this.getOrderDate(order)}</h3>
+        //                     </Col>
+        //                 </Row>
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Order Taken At: {this.getOrderTime(order)}</h3>
+        //                     </Col>
+        //                 </Row>
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Order Taken By: {order.user.firstName} {order.user.lastName}</h3>
+        //                     </Col>
+        //                 </Row>
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Customer: {order.customer.firstName} {order.customer.lastName}</h3>
+        //                     </Col>
+        //                 </Row>
+        //                 <Row>
+        //                     <Col>
+        //                         <h6>Phone Number: {this.formatPhoneNumber(order)}</h6>
+        //                     </Col>
+        //                 </Row>
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Order Detail:</h3>
+        //                     </Col>
+        //                 </Row>
+        //                 {/* {order.menuItems.forEach(menuItem => <h6>{menuItem.name}</h6>)} */}
+        //                 {this.mapOrderDetail(order)}
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Order Total: ${order.totalPrice}</h3>
+        //                     </Col>
+        //                 </Row>
+        //                 <Row>
+        //                     <Col>
+        //                         <h3>Paid For? {order.isPaid}</h3>
+        //                         {console.log('Order Paid?', order.isPaid)}
+        //                     </Col>
+        //                 </Row>
+        //             </Container>
+        //         </ModalBody>
+        //         <Router>
+
+                
+        //         <ModalFooter>
+        //             <Button onClick={(e) => this.payOrder(e)}>Pay For Order</Button>
+        //             {/* <Button onClick={() => order.isPaid == !order.isPaid}>Pay For Order</Button> */}
+        //             <Link to='/order/add'>
+        //                 <Button color='primary' onClick={() => this.addToOrder()}>Add To Order</Button>
+        //             </Link>
+        //             {/* <Button color='primary' onClick={this.props.toggleEdit}>Edit Order</Button> */}
+        //         </ModalFooter>
+        //         {/* {order.menuItems.map((menuItem, i) => {
+        //             <h6>{menuItem.name}</h6>
+        //         })} */}
+        //         <Switch>
+        //             <Route path='/order/all' exact>
+
+                        
+
+        //             </Route>
+        //             <Route path='/order/add' exact>
+        //                 <MenuItemList token={this.props.token} user={this.props.user} orderId={this.props.order.id} orderItems={this.props.order.menuItems} updateOrderItems={this.updateOrderItems} />
+        //             </Route> 
+        //         </Switch>
+        //         </Router>
+        //     </Modal>
+            
+        // );
+
+        return(
+            <Router>
+            <Switch>
+                <Route path='/order/all' exact> 
+                    <Modal isOpen={this.props.orderInfoOn}>
+                        {console.log('Order Prop:', order)}
+                        <ModalHeader>
+                            <Container>
+                                <Row>
+                                    <Col sm='10'>
+                                        <h3>Order Detail</h3>
+                                    </Col>
+                                    <Col sm='2'>
+                                        <Button onClick={this.props.toggleInfo} color='danger'>X</Button>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </ModalHeader>
+                        <ModalBody>
+                            <Container>
+                                <Row>
+                                    <Col>
+                                        <h3>Order Id: {order.id}</h3>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Date Order Taken: {this.getOrderDate(order)}</h3>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Order Taken At: {this.getOrderTime(order)}</h3>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Order Taken By: {order.user.firstName} {order.user.lastName}</h3>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Customer: {order.customer.firstName} {order.customer.lastName}</h3>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h6>Phone Number: {this.formatPhoneNumber(order)}</h6>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Order Detail:</h3>
+                                    </Col>
+                                </Row>
+                                {this.mapOrderDetail(order)}
+                                <Row>
+                                    <Col>
+                                        <h3>Order Total: ${order.totalPrice}</h3>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <h3>Paid For? {order.isPaid}</h3>
+                                        {console.log('Order Paid?', order.isPaid)}
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={(e) => this.payOrder(e)}>Pay For Order</Button>
+                            <Link to='/order/add'>
+                                <Button color='primary' onClick={() => this.addToOrder()}>Add To Order</Button>
+                            </Link>
+                        </ModalFooter>
+                    </Modal>
+                </Route>
+                <Route path='/order/add' exact>
+                    <MenuItemList token={this.props.token} user={this.props.user} orderId={this.props.order.id} orderItems={this.props.order.menuItems} updateOrderItems={this.updateOrderItems} />
+                </Route> 
+            </Switch>
+         </Router>
         );
     }
 }

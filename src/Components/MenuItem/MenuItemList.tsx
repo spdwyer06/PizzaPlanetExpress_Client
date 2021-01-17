@@ -7,16 +7,22 @@ import MenuItem from './MenuItem';
 import MenuItemEdit from './ItemEdit';
 import MenuItemCreate from './ItemCreate';
 
+import MenuItemModel from '../Models/MenuItemModel';
+
 import './MenuItem.css';
-import { Console } from 'console';
+import UserModel from '../Models/UserModel';
 
 
 
 type Props = {
     token: string,
-    user: {
-        isAdmin: boolean
-    }
+    user: UserModel
+    // user: {
+    //     isAdmin: boolean
+    // },
+    orderId: number,
+    orderItems: MenuItemModel[],
+    updateOrderItems: (item: MenuItemModel) => void
 };
 
 type State = {
@@ -97,9 +103,10 @@ export default class MenuItemList extends Component<Props, State> {
         return (
             <div>
                 <h1>All Menu Items</h1>
-                {this.props.user.isAdmin ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
+                {/* {this.props.user.isAdmin ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>} */}
+                {localStorage.getItem('userRole') == 'admin' ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
                 {/* {console.log('State', this.state.menuItems)} */}
-                {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} capName={this.capitalizeName} key={i} refreshMenu={this.mapItems} />)}
+                {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} orderId={this.props.orderId} updateOrderItems={this.props.updateOrderItems} capName={this.capitalizeName} key={i} refreshMenu={this.mapItems} />)}
                 {this.state.createOn ? <MenuItemCreate user={this.props.user} token={this.props.token} createOn={this.state.createOn} toggleCreate={this.toggleCreate} /> : <></>}
             </div>
         );

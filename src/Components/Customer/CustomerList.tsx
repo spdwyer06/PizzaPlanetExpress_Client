@@ -10,7 +10,8 @@ import CustomerModel from '../Models/CustomerModel';
 
 
 type Props = {
-    token: string
+    token: string,
+    updateCustomer: (customer: CustomerModel) => void
 };
 
 type State = {
@@ -72,7 +73,7 @@ export default class CustomerList extends Component<Props, State> {
             <div>
                 <h1>Customer List</h1>
                 <Button onClick={() => this.toggleCustomerCreate()}>Add New Customer</Button>
-                {this.state.customers.map((customer, i) => <Customer token={this.props.token} customer={customer} mapCustomers={this.mapCustomers} />)}
+                {this.state.customers.map((customer, i) => <Customer token={this.props.token} customer={customer} capitalizeName={this.capitalizeName} updateCustomer={this.props.updateCustomer} mapCustomers={this.mapCustomers} key={i} />)}
                 {this.state.customerCreateOn ? <CustomerCreate token={this.props.token} customerCreateOn={this.state.customerCreateOn} toggleCustomerCreate={this.toggleCustomerCreate} mapCustomers={this.mapCustomers} /> : null}
             </div>
         );

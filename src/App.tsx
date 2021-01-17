@@ -55,7 +55,7 @@ class App extends Component<{}, State> {
       console.log('App mount() Start Token State:', this.state.sessionToken);
       if(localStorage.getItem('token')){
         // const user = 
-        this.setState({
+        await this.setState({
           // Casting as string
           sessionToken: (localStorage.getItem('token') as string)
         });
@@ -99,15 +99,47 @@ class App extends Component<{}, State> {
   //   this.state.sessionToken === '' || null ? <Login updateToken={this.updateToken} /> : <button onClick={() => this.logOut()}>Log Out</button>
   // }
 
-  updateToken = (newToken: string): void => {
+  // updateToken = (newToken: string): void => {
+  //   localStorage.setItem('token', newToken);
+  //   this.setState({
+  //     sessionToken: newToken
+  //   });
+  // }
+
+  updateToken = async(newToken: string) => {
     localStorage.setItem('token', newToken);
-    this.setState({
+    await this.setState({
       sessionToken: newToken
     });
   }
 
-  updateUser(user: UserModel): void{
-    this.setState({
+  // updateUser(user: UserModel): void{
+  //   this.setState({
+  //     user: user
+  //   });
+  //   if(user.isAdmin){
+  //     localStorage.setItem('userRole', 'admin');
+  //   }
+  //   else if(user.isManager){
+  //     localStorage.setItem('userRole', 'manager');
+  //   }
+  //   else{
+  //     localStorage.setItem('userRole', 'employee');
+  //   }
+  // }
+
+  async updateUser(user: UserModel){
+    if(user.isAdmin){
+      localStorage.setItem('userRole', 'admin');
+    }
+    else if(user.isManager){
+      localStorage.setItem('userRole', 'manager');
+    }
+    else{
+      localStorage.setItem('userRole', 'employee');
+    }
+    
+    await this.setState({
       user: user
     });
   }

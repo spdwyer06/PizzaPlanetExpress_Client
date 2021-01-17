@@ -55,6 +55,12 @@ export default class Navbar extends Component<Props, {}> {
                 </NavItem>
                 <br /> */}
                 <NavItem>
+                    <Link to='/customer/all'>
+                        <Button>View Customers</Button>
+                    </Link>
+                </NavItem>
+                <br />
+                <NavItem>
                     <Link to='/order/create'>
                         <Button>Start A New Order</Button>
                     </Link>
