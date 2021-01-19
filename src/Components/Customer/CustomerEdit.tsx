@@ -41,8 +41,8 @@ export default class CustomerEdit extends Component<Props, State> {
             const options = {
                 method: 'PUT',
                 body: JSON.stringify({
-                    firstName: this.state.updatedFirstName,
-                    lastName: this.state.updatedLastName,
+                    firstName: this.capitalizeName(this.state.updatedFirstName),
+                    lastName: this.capitalizeName(this.state.updatedLastName),
                     phoneNumber: this.state.updatedPhoneNumber
                 }),
                 headers: new Headers({
@@ -81,6 +81,8 @@ export default class CustomerEdit extends Component<Props, State> {
             console.log('Error:', err.message);
         }
     }
+
+    capitalizeName = (name: string) => name[0].toUpperCase() + name.slice(1);
 
     render() {
         return (

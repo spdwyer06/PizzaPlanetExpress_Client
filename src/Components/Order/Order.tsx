@@ -113,7 +113,7 @@ export default class Order extends Component<Props, State> {
             <div>
                 {/* {console.log('Props In Order Comp:', this.props.order)} */}
                 <h3>Customer Name: {order.customer.lastName}, {order.customer.firstName}</h3>
-                <h3>Order Price: {order.totalPrice}</h3>
+                <h3>Order Price: ${order.totalPrice.toFixed(2)}</h3>
                 {/* {this.props.user.isManager || this.props.user.isAdmin ? <Button onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null} */}
                 {localStorage.getItem('userRole') == 'manager' || localStorage.getItem('userRole') == 'admin' ? <Button color='danger' onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null}
                 {/* {this.isUserManagerOrAdmin() ? <Button onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null} */}

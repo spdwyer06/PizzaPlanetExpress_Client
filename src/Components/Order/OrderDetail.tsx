@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap';
 import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
 
 import API_URL from '../../env';
 import MenuItemList from '../MenuItem/MenuItemList';
+import OrderDetailItems from './OrderDetailItems';
 
 import OrderModel from '../Models/OrderModel';
 import UserModel from '../Models/UserModel';
 import MenuItemModel from '../Models/MenuItemModel';
+
 
 
 
@@ -46,13 +48,17 @@ type Props = {
     mapOrders: () => void
 };
 
-export default class OrderDetail extends Component<Props> {
+type State = {
+    isPaid: string
+};
+
+export default class OrderDetail extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
     
         this.state = {
-             
+            isPaid: ''
         }
     }
     
@@ -130,6 +136,24 @@ export default class OrderDetail extends Component<Props> {
         catch(err){
             console.log('Error:', err.message);
         }
+    }
+
+    // async setIsPaid = (order: OrderModel) => await this.setState({isPaid: order.isPaid});
+
+    //? Set up in a componentDidMount()???
+    async setIsPaid(order: OrderModel){
+        // console.log('Getting isPaid State:', this.state.isPaid);
+        order.isPaid ? await this.setState({isPaid: 'Yes'}) : await this.setState({isPaid: 'No'})
+        // await this.setState({
+        //     isPaid: order.isPaid
+        // });
+        // console.log('Setting isPaid State:', this.state.isPaid);
+    }
+    
+    componentDidMount(){
+        this.setIsPaid(this.props.order);
+        // const isPaidTag = (document.getElementById('isPaidElement') as HTMLElement);
+        // isPaidTag.innerText = this.state.isPaid.toString();
     }
 
     render() {
@@ -234,6 +258,7 @@ export default class OrderDetail extends Component<Props> {
 
         return(
             <Router>
+                {/* {this.setIsPaid(order)} */}
             <Switch>
                 <Route path='/order/all' exact> 
                     <Modal isOpen={this.props.orderInfoOn}>
@@ -287,15 +312,19 @@ export default class OrderDetail extends Component<Props> {
                                         <h3>Order Detail:</h3>
                                     </Col>
                                 </Row>
-                                {this.mapOrderDetail(order)}
+
+                                {/* {this.mapOrderDetail(order)} */}
+                                <OrderDetailItems order={order} />
+
                                 <Row>
                                     <Col>
-                                        <h3>Order Total: ${order.totalPrice}</h3>
+                                        <h3>Order Total: ${order.totalPrice.toFixed(2)}</h3>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        <h3>Paid For? {order.isPaid}</h3>
+                                        {/* <h3>Paid For? {order.isPaid.toString()}</h3> */}
+                                        <h3>Paid For? {this.state.isPaid}</h3>
                                         {console.log('Order Paid?', order.isPaid)}
                                     </Col>
                                 </Row>
