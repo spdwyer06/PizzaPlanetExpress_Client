@@ -1,55 +1,15 @@
 import React, { Component } from 'react';
 import {Button} from 'reactstrap';
-import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
 
 import OrderDetail from './OrderDetail';
-import OrderEdit from './OrderEdit';
 import API_URL from '../../env';
-import MenuItemList from '../MenuItem/MenuItemList';
 
 import OrderModel from '../Models/OrderModel';
 import UserModel from '../Models/UserModel';
 
 
 
-// type UserModel = {
-//     isManager: boolean,
-//     isAdmin: boolean
-// };
-
-// type MenuItemModel = {
-//     name: string,
-//     price: number,
-//     orderItem: {
-//         quantity: number
-//     }
-// }
-
-// type OrderModel = {
-//     id: number,
-//     user: {
-//         firstName: string,
-//         lastName: string
-//     },
-//     customer: {
-//         firstName: string,
-//         lastName: string,
-//         phoneNumber: number
-//     },
-//     orderTime: Date,
-//     menuItems: [MenuItemModel],
-//     totalPrice: number,
-//     isPaid: boolean
-// }    
-
 type Props = {
-    // order: {
-    //     customer: {
-    //         firstName: string,
-    //         lastName: string
-    //     },
-    //     totalPrice: number
-    // }
     order: OrderModel,
     user: UserModel,
     token: string,
@@ -58,8 +18,7 @@ type Props = {
 };
 
 type State = {
-    orderInfoOn: boolean,
-    // orderEditOn: boolean
+    orderInfoOn: boolean
 };
 
 export default class Order extends Component<Props, State> {
@@ -78,11 +37,8 @@ export default class Order extends Component<Props, State> {
     
     toggleOrderInfo = () => this.setState({orderInfoOn: !this.state.orderInfoOn});
 
-    // toggleOrderEdit = () => this.setState({orderEditOn: !this.state.orderEditOn});
-
     async deleteOrder(e: React.MouseEvent){
         try{
-            // console.log('Delete Order:', this.props.order.id);
             const url = `${API_URL}/order/${this.props.order.id}`;
             const options = {
                 method: 'DELETE',
@@ -114,29 +70,11 @@ export default class Order extends Component<Props, State> {
 
         return (
             <div>
-                {/* {console.log('Props In Order Comp:', this.props.order)} */}
                 <h3>Customer Name: {order.customer.lastName}, {order.customer.firstName}</h3>
                 <h3>Order Price: ${order.totalPrice.toFixed(2)}</h3>
-                {/* {this.props.user.isManager || this.props.user.isAdmin ? <Button onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null} */}
                 {localStorage.getItem('userRole') == 'manager' || localStorage.getItem('userRole') == 'admin' ? <Button color='danger' onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null}
-                {/* {this.isUserManagerOrAdmin() ? <Button onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null} */}
                 <Button onClick={this.toggleOrderInfo}>View</Button>
-                {/* {this.state.orderInfoOn ? <OrderDetail token={this.props.token} user={this.props.user} mapOrders={this.props.mapOrders} toggleInfo={this.toggleOrderInfo} toggleEdit={this.toggleOrderEdit} orderInfoOn={this.state.orderInfoOn} order={order} /> : null} */}
                 {this.state.orderInfoOn ? <OrderDetail token={this.props.token} user={this.props.user} mapOrders={this.props.mapOrders} toggleInfo={this.toggleOrderInfo}  orderInfoOn={this.state.orderInfoOn} order={order} setOrderId={this.props.setOrderId} /> : null}
-                {/* {this.state.addToOrderOn ? } */}
-                {/* {this.state.orderEditOn ? <OrderEdit toggleEdit={this.toggleOrderEdit} orderEditOn={this.state.orderEditOn} order={order} /> : null} */}
-
-                {/* <Route path={/\/order\/.+/}>
-                    <Link to="/order"><em>← back</em></Link>
-                </Route> */}
-
-
-                {/* <Switch>
-                    <Route exact path='/order/add'>
-                        <h2>Stuff n things</h2>
-                        <MenuItemList token={this.props.token} user={this.props.user} orderId={this.props.order.id} />
-                    </Route> 
-                </Switch> */}
             </div>
         );
     }

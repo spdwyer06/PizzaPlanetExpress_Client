@@ -39,18 +39,11 @@ export default class Auth extends Component<Props, State> {
     }
     
     toggleSignup(): void{
-        // this.state.signupOpen == true ? this.setState({signupOpen: false}) : this.setState({signupOpen: true});
         this.setState({signupOpen: !this.state.signupOpen});
     }
 
     toggleLogin(): void{
         this.setState({loginOpen: !this.state.loginOpen})
-        // if(this.state.loginOpen == true){
-        //     this.setState({loginOpen: false});
-        // }
-        // else{
-        //     this.setState({loginOpen: true});
-        // }
     }
 
     render() {

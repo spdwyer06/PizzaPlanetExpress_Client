@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
 import {Button} from 'reactstrap';
 
 import API_URL from '../../env';
 import MenuItemEdit from './ItemEdit';
 import AddToOrder from './AddToOrder';
-
-import MenuItemModel from '../Models/MenuItemModel';
 
 import './MenuItem.css';
 
@@ -22,8 +19,7 @@ type Props = {
     },
     orderId: number,
     capName: (name: string) => string,
-    refreshMenu: () => void,
-    // updateOrderItems: (item: MenuItemModel) => void
+    refreshMenu: () => void
 };
 
 type State = {
@@ -54,7 +50,6 @@ export default class MenuItem extends Component<Props, State> {
 
     async toggleEdit(){
         await this.setState({editOn: !this.state.editOn});
-        // !this.state.editOn ? this.props.refreshMenu() : <></>;
     }
 
     toggleAddToOrder = async() => await this.setState({addToOrderOn: !this.state.addToOrderOn});
@@ -90,27 +85,16 @@ export default class MenuItem extends Component<Props, State> {
         const {item} = this.props;
 
         return (
-                <div>
-                    {/* <h3>{this.props.item.name}</h3> */}
-                    <h3>{this.props.capName(item.name)}</h3>
-                    {/* .toFixed(2) => specifiy 2 decimal places */}
-                    <h3>${this.props.item.price.toFixed(2)}</h3>
-                    {/* {this.props.user.isAdmin ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>} */}
-                    {localStorage.getItem('userRole') == 'admin' ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>}
-                    {/* {this.props.orderId != 0 ? <Button onClick={() => this.props.updateOrderItems(item)}>Add To Order</Button> : null} */}
-                    {/* {this.props.orderId != 0 ? <Button onClick={() => this.addItemToOrder(item)}>Add To Order</Button> : null} */}
-                    {this.props.orderId != 0 ? <Button onClick={this.toggleAddToOrder}>Add To Order</Button> : null}
-                    {console.log('Menu Item Token:', this.props.token)}
-                    {this.state.editOn ? <MenuItemEdit refreshMenu={this.props.refreshMenu} token={this.props.token} toggleEdit={this.toggleEdit} item={this.props.item} editOn={this.state.editOn} /> : null}
-                    {this.state.addToOrderOn ? <AddToOrder addToOrderOn={this.state.addToOrderOn} toggleAddToOrder={this.toggleAddToOrder} updateSpecialInstructions={this.updateSpecialInstructions} updateQuantity={this.updateQuantity} addItemToOrder={this.addItemToOrder} /> : null}
-                </div>
-
-            //     <Switch>
-            //         <Route path='/menuItem/itemId' exact>
-            //             <MenuItemEdit item={this.props.item} />
-            //         </Route>
-            //     </Switch>
-            // </Router>
+            <div>
+                <h3>{this.props.capName(item.name)}</h3>
+                {/* .toFixed(2) => specifiy 2 decimal places */}
+                <h3>${this.props.item.price.toFixed(2)}</h3>
+                {localStorage.getItem('userRole') == 'admin' ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>}
+                {this.props.orderId != 0 ? <Button onClick={this.toggleAddToOrder}>Add To Order</Button> : null}
+                {console.log('Menu Item Token:', this.props.token)}
+                {this.state.editOn ? <MenuItemEdit refreshMenu={this.props.refreshMenu} token={this.props.token} toggleEdit={this.toggleEdit} item={this.props.item} editOn={this.state.editOn} /> : null}
+                {this.state.addToOrderOn ? <AddToOrder addToOrderOn={this.state.addToOrderOn} toggleAddToOrder={this.toggleAddToOrder} updateSpecialInstructions={this.updateSpecialInstructions} updateQuantity={this.updateQuantity} addItemToOrder={this.addItemToOrder} /> : null}
+            </div>
         );
     }
 }

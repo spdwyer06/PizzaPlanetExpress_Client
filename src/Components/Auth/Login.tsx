@@ -1,5 +1,5 @@
-import React, { ChangeEvent, Component } from 'react';
-import {Button, Modal, Form, FormGroup, Label, Container, Row, Col, ModalHeader} from 'reactstrap';
+import React, { Component } from 'react';
+import {Button, Modal, Label, Container, Row, Col, ModalHeader} from 'reactstrap';
 
 import Backspace from './backspace.png';
 import API_URL from '../../env';
@@ -31,40 +31,18 @@ export default class Login extends Component<Props, State> {
     
         this.state = {
             password: '',
-            //  loginOpen: false
         }
     }
     
-    // <HTMLButtonElement>
-    
-    // setPass(e: Event){
-    // setPass(e: React.MouseEvent<HTMLButtonElement>){
     setPass(e: React.MouseEvent<HTMLElement>){
-    // setPass(e: ChangeEvent<HTMLInputElement>){
         const value = (e.target as HTMLButtonElement).value;
-        // console.log('Button Value:', e.target.value);
         console.log('Button Value:', value);
         let passBox = document.getElementById('password');
-        // passBox.innerText += e.target.value;
         (passBox as HTMLInputElement).innerText += value;
 
-        // this.setState((state, value) => ({
-        //     password: state.password + value
-        // }))
-
         this.setState({
-            // password: this.state.password + e.target.value
             password: this.state.password + value
         }, () => console.log('Password State:', this.state.password));
-
-        // if(this.state.password.length == 3){
-        //     const numBtns = Array.from(document.querySelectorAll('button'));
-        //     console.log('Num Btns:', numBtns.length);
-        //     const btns = numBtns.slice(0, -1);
-        //     btns.forEach(btn => {
-        //         btn.style.display = 'none';
-        //     });
-        // }
     } 
     
     removeLastNum(){
@@ -97,9 +75,6 @@ export default class Login extends Component<Props, State> {
                 const token = r.token;
                 console.log('User:', user);
                 console.log('Token:', token);
-                // const robj = await res.json();
-                // console.log('robj:', robj);
-                // console.log('Token:', robj.token);
                 await this.props.updateToken(token);
                 await this.props.updateUser(user);
                 this.props.toggleLogin();
@@ -115,7 +90,6 @@ export default class Login extends Component<Props, State> {
 
     render(){
         return(
-            // <Container className='loginContainer themed-container' fluid='sm'>
             <Modal isOpen={true}>
                 <ModalHeader>
                     <Container>

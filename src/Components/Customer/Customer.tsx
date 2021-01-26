@@ -48,15 +48,10 @@ export default class Customer extends Component<Props, State> {
 
         return (
             <div>
-                {/* <h3>{this.props.capitalizeName(customer.firstName)}</h3>
-                <h3>{this.props.capitalizeName(customer.lastName)}</h3> */}
-                {/* <h3>{this.props.capitalizeName(customer.lastName)}, {this.props.capitalizeName(customer.firstName)}</h3> */}
                 <h3>{this.props.capitalizeName(customer.firstName)} {this.props.capitalizeName(customer.lastName)}</h3>
-                {/* <h3>{customer.phoneNumber}</h3> */} 
                 <h3>{this.formatPhoneNumber(customer)}</h3>
                 {/* If the url isn't on order create, don't show the button */}
                 {window.location.href == 'http://localhost:3000/order/create' ?  <Button color='primary' onClick={() => this.props.updateCustomer(customer)}>Select Customer</Button> : null}
-                {/* <Button color='primary' onClick={() => this.props.updateCustomer(customer)}>Select Customer</Button> */}
                 <Button onClick={() => this.toggleCustomerEdit()}>Edit Customer Info</Button>
                 {this.state.editCustomerOn ? <CustomerEdit token={this.props.token} customer={this.props.customer} editCustomerOn={this.state.editCustomerOn} mapCustomers={this.props.mapCustomers} toggleCustomerEdit={this.toggleCustomerEdit} /> : null}
             </div>

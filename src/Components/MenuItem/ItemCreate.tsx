@@ -10,9 +10,6 @@ type Props = {
     createOn: boolean,
     token: string,
     user: UserModel,
-    // user: {
-        //     isAdmin: boolean
-        // }
     toggleCreate: () => void,
     capitalizeName: (name: string) => string
 };

@@ -15,7 +15,6 @@ type Props = {
 };
 
 type State = {
-    // customers: [CustomerModel] | [],
     customers: [],
     customerCreateOn: boolean
 };
@@ -46,11 +45,9 @@ export default class CustomerList extends Component<Props, State> {
             };
 
             const res = await fetch(url, options);
-            // console.log('1', res);
             const resJson = await res.json();
-            // console.log('2', resJson);
             const customers = resJson.Customers;
-            // console.log('3', customers);
+            
             this.setState({
                 customers: customers
             });

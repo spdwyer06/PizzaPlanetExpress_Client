@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, ModalFooter, Container, Row, Col } from "reactstrap";
 
 import API_URL from '../../env';
@@ -74,10 +73,8 @@ export default class ItemEdit extends Component<Props, State> {
             };
 
             await fetch(url, options);
-            // console.log('Edit On Prop Before:', this.props.editOn);
             this.props.refreshMenu();
             this.props.toggleEdit();
-            // console.log('Edit On Prop After:', this.props.editOn);
         }
         catch(err){
             console.log('Error:', err.message);
@@ -100,8 +97,7 @@ export default class ItemEdit extends Component<Props, State> {
                     </Container>
                 </ModalHeader>
                 <Form onSubmit={(e) => this.submitForm(e)}>
-                <ModalBody>
-                    {/* <Form onSubmit={(e) => this.submitForm(e)}> */}
+                    <ModalBody>
                         <FormGroup>
                             <Label for='itemId'>Item Id: {this.props.item.id}</Label>
                         </FormGroup>
@@ -113,12 +109,11 @@ export default class ItemEdit extends Component<Props, State> {
                             <Label for='itemPrice'>Menu Item Price:</Label>
                             <Input name='itemPrice' id='itemPriceInput' required placeholder={(this.props.item.price).toString()} onChange={e => this.setState({updatedPrice: parseInt(e.target.value)})} />
                         </FormGroup>
-                    {/* </Form> */}
-                </ModalBody>
-                <ModalFooter>
-                    <Button type='submit'>Done</Button>
-                    <Button color='danger' onClick={(e) => this.removeItem(e)}>Remove Item From Menu</Button>
-                </ModalFooter>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button type='submit'>Done</Button>
+                        <Button color='danger' onClick={(e) => this.removeItem(e)}>Remove Item From Menu</Button>
+                    </ModalFooter>
                 </Form>
             </Modal>
         );

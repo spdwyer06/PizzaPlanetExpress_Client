@@ -18,7 +18,7 @@ type State = {
     password: number | null
 };
 
-export class Signup extends Component<Props, State> {
+export default class Signup extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props)
@@ -32,10 +32,6 @@ export class Signup extends Component<Props, State> {
     
     async createUser(e: React.FormEvent){
         e.preventDefault();
-        // console.log('Form Submitted');
-        // console.log('First Name State:', this.state.firstName);
-        // console.log('Last Name State:', this.state.lastName);
-        // console.log('Password State:', this.state.password);
         const url = `${API_URL}/user/create`;
         const options = {
             method: 'POST',
@@ -50,15 +46,12 @@ export class Signup extends Component<Props, State> {
         };
 
         try{
-            // await fetch(url, options);
             const res = await fetch(url, options);
             if(res.status != 500){
                 this.props.toggleSignup();
             }
             else{
                 const r = await res.json();
-                // console.log('Error', r);
-                // console.log('Error 2', r.Error);
                 console.log('Error:', r.Error.errors[0].message);
             }
         }
@@ -66,13 +59,6 @@ export class Signup extends Component<Props, State> {
             console.log('Error:', err.message);
         }
     }
-
-    // async updateLastName(e){
-    //     console.log('First Name State:', this.state.firstName);
-    //     console.log('Last Name State Start:', this.state.lastName);
-    //     await this.setState({lastName: e.target.value});
-    //     console.log('Last Name State End:', this.state.lastName);
-    // }
 
     render() {
         return (
@@ -94,8 +80,8 @@ export class Signup extends Component<Props, State> {
                     <Button type='submit'>Create User</Button>
                 </Form>
             </Modal>
-        )
+        );
     }
 }
 
-export default Signup
+

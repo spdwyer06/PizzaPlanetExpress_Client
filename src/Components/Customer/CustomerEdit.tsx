@@ -61,8 +61,6 @@ export default class CustomerEdit extends Component<Props, State> {
     }
 
     async removeCustomer(e: React.MouseEvent){
-        // e.preventDefault();
-
         try{
             const url = `${API_URL}/customer/${this.props.customer.id}`;
             const options = {

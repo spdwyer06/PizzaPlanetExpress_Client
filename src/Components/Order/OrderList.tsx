@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'reactstrap';
-import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import API_URL from '../../env';
 import Order from './Order';
@@ -54,14 +53,16 @@ export default class OrderList extends Component<Props, State> {
             };
             
             const allOrders = await fetch(url, options);
-            // console.log(allOrders.status);
-            // console.log('allOrders:', allOrders);
             const ordersJson = await allOrders.json();
-            // console.log('ordersJson:', ordersJson);
             const orders = ordersJson.Orders;
-            // console.log('orders:', orders);
             
-            this.setState({orders: orders});
+            if(orders){
+                console.log('Orders present');
+                await this.setState({orders: orders});
+            }
+            else{
+                console.log('No orders');
+            }
         }
         catch(err){
             console.log('Error', err.message);
@@ -72,34 +73,6 @@ export default class OrderList extends Component<Props, State> {
         this.mapOrders();
     }
 
-    // async componentDidMount(){
-    //     console.log('OrderList Token:', this.props.token);
-
-    //     try{
-    //         const url = `${API_URL}/order/all`;
-    //         const options = {
-    //             method: 'GET',
-    //             headers: new Headers({
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': this.props.token
-    //             })
-    //         };
-            
-    //         const allOrders = await fetch(url, options);
-    //         // console.log(allOrders.status);
-    //         // console.log('allOrders:', allOrders);
-    //         const ordersJson = await allOrders.json();
-    //         // console.log('ordersJson:', ordersJson);
-    //         const orders = ordersJson.Orders;
-    //         // console.log('orders:', orders);
-            
-    //         this.setState({orders: orders});
-    //     }
-    //     catch(err){
-    //         console.log('Error', err.message);
-    //     }
-    // }
-
     toggleOrderCreate = () => this.setState({orderCreateOn: !this.state.orderCreateOn});
 
     setOrderId = (orderId: number) => this.setState({orderId: orderId});
@@ -108,12 +81,10 @@ export default class OrderList extends Component<Props, State> {
         return (
             <div>
 
-            <Route exact path='/order/all'>
-                <h1>All Orders</h1>
-                <Button onClick={this.toggleOrderCreate}>Create New Order</Button>
-                {this.state.orders.map((order, i) => <Order token={this.props.token} user={this.props.user} order={order} key={i} mapOrders={this.mapOrders} setOrderId={this.setOrderId} />)}
-                {/* {console.log('Order List State:', this.state.orders)} */}
-            </Route>
+                <Route exact path='/order/all'>
+                    <h1>All Orders</h1>
+                    {this.state.orders.length > 0 ? this.state.orders.map((order, i) => <Order token={this.props.token} user={this.props.user} order={order} key={i} mapOrders={this.mapOrders} setOrderId={this.setOrderId} />) : <h3>No orders yet</h3>}
+                </Route>
 
                 <Switch>
                     <Route exact path='/order/add'>
