@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, Container, Row, Col } from "reactstrap";
 
 import API_URL from '../../env';
+import UserModel from '../Models/UserModel';
 
 
 
 type Props = {
     createOn: boolean,
-    toggleCreate: () => void,
     token: string,
-    user: {
-        isAdmin: boolean
-    }
+    user: UserModel,
+    // user: {
+        //     isAdmin: boolean
+        // }
+    toggleCreate: () => void,
+    capitalizeName: (name: string) => string
 };
 
 type State = {
@@ -38,8 +41,8 @@ export default class ItemCreate extends Component<Props, State> {
             const options = {
                 method: 'POST',
                 body: JSON.stringify({
-                    name: this.state.name,
-                    price: this.state.price
+                    name: this.props.capitalizeName(this.state.name),
+                    price: this.state.price?.toFixed(2)
                 }),
                 headers: new Headers({
                     'Content-Type': 'application/json',

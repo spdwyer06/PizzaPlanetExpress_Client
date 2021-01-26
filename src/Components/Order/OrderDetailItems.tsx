@@ -6,6 +6,8 @@ import OrderModel from '../Models/OrderModel';
 import './order.css';
 
 
+//! No Longer In Use
+
 type Props = {
     order: OrderModel
 }
@@ -28,6 +30,7 @@ export default class OrderDetailItems extends Component<Props> {
 
                     const totalItemPrice = menuItem.price * menuItem.orderItem.quantity;
 
+                    return(
                     <Row key={i}>
                         <Col>
                             <h6>{menuItem.name}</h6>
@@ -39,6 +42,7 @@ export default class OrderDetailItems extends Component<Props> {
                             <h6>{totalItemPrice}</h6>
                         </Col>
                     </Row>
+                    )
                     console.log('OrderDetailItems Key:', i);
                     console.log('OrderDetailItems Name:', menuItem.name);
                     console.log('OrderDetailItems Quantity:', menuItem.orderItem.quantity);

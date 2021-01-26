@@ -23,7 +23,7 @@ type Props = {
     orderId: number,
     capName: (name: string) => string,
     refreshMenu: () => void,
-    updateOrderItems: (item: MenuItemModel) => void
+    // updateOrderItems: (item: MenuItemModel) => void
 };
 
 type State = {

@@ -45,7 +45,8 @@ type Props = {
     order: OrderModel,
     token: string,
     user: UserModel,
-    mapOrders: () => void
+    mapOrders: () => void,
+    setOrderId: (orderId: number) => void
 };
 
 type State = {
@@ -107,11 +108,12 @@ export default class OrderDetail extends Component<Props, State> {
         // this.props.toggleInfo();
         // window.location.href == '/menuItem/all';
         console.log('addToOrder() in OrderDetail');
-        <Switch>
-            <Route path='/order/add' exact>
-                <MenuItemList token={this.props.token} user={this.props.user} orderId={this.props.order.id} orderItems={this.props.order.menuItems} updateOrderItems={this.updateOrderItems} />
-            </Route> 
-        </Switch>
+        this.props.setOrderId(this.props.order.id);
+        // <Switch>
+        //     <Route path='/order/add' exact>
+        //         <MenuItemList token={this.props.token} user={this.props.user} orderId={this.props.order.id} />
+        //     </Route> 
+        // </Switch>
     }
 
     async payOrder(e: React.MouseEvent){
@@ -257,10 +259,10 @@ export default class OrderDetail extends Component<Props, State> {
         // );
 
         return(
-            <Router>
+            <div>
                 {/* {this.setIsPaid(order)} */}
-            <Switch>
-                <Route path='/order/all' exact> 
+            {/* <Switch> */}
+                <Route path='/order' > 
                     <Modal isOpen={this.props.orderInfoOn}>
                         {console.log('Order Prop:', order)}
                         <ModalHeader>
@@ -312,9 +314,32 @@ export default class OrderDetail extends Component<Props, State> {
                                         <h3>Order Detail:</h3>
                                     </Col>
                                 </Row>
+                                <Row>
+                                    <Col>
+                                        <h6>Item Name</h6>
+                                    </Col>
+                                </Row>
+                                {order.menuItems.map((menuItem, i) => {
+                                    return(
+                                        // const totalItemPrice = menuItem.price * menuItem.orderItem.quantity
 
+                                        <Row key={i}>
+                                            <Col>
+                                                <pre>
+                                                    <h6>{menuItem.name}   X   {menuItem.orderItem.quantity}</h6>
+                                                </pre>
+                                            </Col>
+                                            {/* <Col>
+                                                <h6>{menuItem.orderItem.quantity}</h6>
+                                            </Col> */}
+                                            <Col>
+                                                <h6>{menuItem.price * menuItem.orderItem.quantity}</h6>
+                                            </Col>
+                                        </Row>
+                                    );
+                                })}
                                 {/* {this.mapOrderDetail(order)} */}
-                                <OrderDetailItems order={order} />
+                                {/* <OrderDetailItems order={order} /> */}
 
                                 <Row>
                                     <Col>
@@ -333,16 +358,15 @@ export default class OrderDetail extends Component<Props, State> {
                         <ModalFooter>
                             <Button onClick={(e) => this.payOrder(e)}>Pay For Order</Button>
                             <Link to='/order/add'>
+                                {/* <Button color='primary'>Add To Order</Button> */}
                                 <Button color='primary' onClick={() => this.addToOrder()}>Add To Order</Button>
                             </Link>
                         </ModalFooter>
                     </Modal>
                 </Route>
-                <Route path='/order/add' exact>
-                    <MenuItemList token={this.props.token} user={this.props.user} orderId={this.props.order.id} orderItems={this.props.order.menuItems} updateOrderItems={this.updateOrderItems} />
-                </Route> 
-            </Switch>
-         </Router>
+
+            {/* </Switch> */}
+         </div>
         );
     }
 }
