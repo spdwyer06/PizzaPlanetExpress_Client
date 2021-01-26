@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, ModalFooter, Container, Row, Col } from "reactstrap";
 
+import API_URL from '../../env';
+
 
 
 type Props = {
+    token: string,
+    itemId: number,
+    orderId: number,
     addToOrderOn: boolean,
     toggleAddToOrder: () => void,
     updateSpecialInstructions: (instructions: string) => void,
     updateQuantity: (quantity: number) => void,
-    addItemToOrder: () => void
+    addItemToOrder: (e: React.FormEvent) => void
 };
 
 export default class AddToOrder extends Component<Props> {
@@ -17,10 +22,10 @@ export default class AddToOrder extends Component<Props> {
         super(props)
     
         this.state = {
-             
         }
+
     }
-    
+
     render() {
         return (
             <Modal isOpen={this.props.addToOrderOn}>
@@ -36,7 +41,7 @@ export default class AddToOrder extends Component<Props> {
                         </Row>
                     </Container>
                 </ModalHeader>
-                <Form onSubmit={this.props.addItemToOrder}>
+                <Form onSubmit={(e) => this.props.addItemToOrder(e)}>
                     <ModalBody>
                         <FormGroup>
                             <Label for='quantity'>Quantity:</Label>
@@ -51,4 +56,3 @@ export default class AddToOrder extends Component<Props> {
         );
     }
 }
-
