@@ -30,34 +30,43 @@ export default class ItemCreate extends Component<Props, State> {
     }
 
     async submitForm(e: React.FormEvent){
-        try{
-            e.preventDefault();
-            console.log('Item Create Start User:', this.props.user);
-            
-            const url = `${API_URL}/menuItem/create`;
-            const options = {
-                method: 'POST',
-                body: JSON.stringify({
-                    name: this.props.capitalizeName(this.state.name),
-                    price: this.state.price?.toFixed(2)
-                }),
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Authorization': this.props.token
-                })
-            };
+        e.preventDefault();
 
-            await fetch(url, options);
+        const stringValues = /^[A-Za-z]+$/
 
-            console.log('Item Create End User:', this.props.user);
-
-            this.props.toggleCreate();
+        if(!stringValues.test(this.state.name)){
+            alert('Enter a valid item name.');
         }
-        catch(err){
-            console.log('Error:', err.message);
+        else if(!Number(this.state.price)){
+            alert('Enter a valid item price.');
         }
-
-
+        else{
+            try{
+                console.log('Item Create Start User:', this.props.user);
+                
+                const url = `${API_URL}/menuItem/create`;
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: this.props.capitalizeName(this.state.name),
+                        price: this.state.price?.toFixed(2)
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': this.props.token
+                    })
+                };
+    
+                await fetch(url, options);
+    
+                console.log('Item Create End User:', this.props.user);
+    
+                this.props.toggleCreate();
+            }
+            catch(err){
+                console.log('Error:', err.message);
+            }
+        }
     }
 
     render() {
