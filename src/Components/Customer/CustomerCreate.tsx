@@ -35,28 +35,45 @@ export default class CustomerCreate extends Component<Props, State> {
         
         e.preventDefault();
 
-        try{
-            const url = `${API_URL}/customer`;
-            const options = {
-                method: 'POST',
-                body: JSON.stringify({
-                    firstName: this.capitalizeName(this.state.firstName),
-                    lastName: this.capitalizeName(this.state.lastName),
-                    phoneNumber: this.state.phoneNumber
-                }),
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Authorization': this.props.token
-                })
-            };
+        const stringValues = /^[A-Za-z]+$/
 
-            await fetch(url, options);
-            this.props.mapCustomers();
-            this.props.toggleCustomerCreate();
+        if(!stringValues.test(this.state.firstName)){
+            alert('Enter a valid first name.');
         }
-        catch(err){
-            console.log('Error:', err.message);
+        else if(!stringValues.test(this.state.lastName)){
+            alert('Enter a valid last name.');
         }
+        else if(!Number(this.state.phoneNumber)){
+            alert('Enter a valid phone number.');
+        }
+        else if(this.state.phoneNumber.toString().length != 10){
+            alert('Enter a 10-digit phone number (include area code)');
+        }
+        else{
+            try{
+                const url = `${API_URL}/customer`;
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        firstName: this.capitalizeName(this.state.firstName),
+                        lastName: this.capitalizeName(this.state.lastName),
+                        phoneNumber: this.state.phoneNumber
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': this.props.token
+                    })
+                };
+    
+                await fetch(url, options);
+                this.props.mapCustomers();
+                this.props.toggleCustomerCreate();
+            }
+            catch(err){
+                console.log('Error:', err.message);
+            }
+        }
+
     }
     
     capitalizeName = (name: string) => name[0].toUpperCase() + name.slice(1);
