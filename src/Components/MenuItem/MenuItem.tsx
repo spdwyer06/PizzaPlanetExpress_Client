@@ -61,7 +61,15 @@ export default class MenuItem extends Component<Props, State> {
 
     updateSpecialInstructions = async(instructions: string) => await this.setState({specialInstructions: instructions});
 
-    updateQuantity = async(qunatity: number) => await this.setState({quantity: qunatity});
+    // updateQuantity = async(quantity: number) => await this.setState({quantity: quantity});
+
+    async updateQuantity(quantity: number){
+        const currentQuantity = this.state.quantity;
+
+        await this.setState({
+            quantity: currentQuantity + quantity
+        });
+    }
     
     async addItemToOrder(){
         try{
@@ -102,7 +110,7 @@ export default class MenuItem extends Component<Props, State> {
                     {this.props.orderId != 0 ? <Button onClick={this.toggleAddToOrder}>Add To Order</Button> : null}
                     {console.log('Menu Item Token:', this.props.token)}
                     {this.state.editOn ? <MenuItemEdit refreshMenu={this.props.refreshMenu} token={this.props.token} toggleEdit={this.toggleEdit} item={this.props.item} editOn={this.state.editOn} /> : null}
-                    {this.state.addToOrderOn ? <AddToOrder addToOrderOn={this.state.addToOrderOn} toggleAddToOrder={this.toggleAddToOrder} updateSpecialInstructions={this.updateSpecialInstructions} updateQuantity={this.updateQuantity} addItemToOrder={this.addItemToOrder} /> : null}
+                    {this.state.addToOrderOn ? <AddToOrder addToOrderOn={this.state.addToOrderOn} toggleAddToOrder={this.toggleAddToOrder} updateSpecialInstructions={this.updateSpecialInstructions} updateQuantity={this.updateQuantity} addItemToOrder={this.addItemToOrder} quantity={this.state.quantity} /> : null}
                 </div>
 
             //     <Switch>

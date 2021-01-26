@@ -8,7 +8,8 @@ type Props = {
     toggleAddToOrder: () => void,
     updateSpecialInstructions: (instructions: string) => void,
     updateQuantity: (quantity: number) => void,
-    addItemToOrder: () => void
+    addItemToOrder: () => void,
+    quantity: number
 };
 
 export default class AddToOrder extends Component<Props> {
@@ -44,10 +45,23 @@ export default class AddToOrder extends Component<Props> {
                             <Label for='specialInstructions'>Special Instructions:</Label>
                             <Input name='specialInstructions' id='specialInstructionsInput' required onChange={(e) => this.props.updateSpecialInstructions(e.target.value)} />
                         </FormGroup> */}
-                        <FormGroup>
+                        {/* <FormGroup>
                             <Label for='quantity'>Quantity:</Label>
                             <Input name='quantity' id='quantityInput' required onChange={(e) => this.props.updateQuantity(parseInt(e.target.value))} />
-                        </FormGroup>
+                        </FormGroup> */}
+                        <Container>
+                            <Row>
+                                <Col sm='3'>
+                                    {this.props.quantity > 0 ? <Button onClick={() => this.props.updateQuantity(-1)}>-</Button> : null}
+                                </Col>
+                                <Col sm='6' className='text-center'>
+                                    <h1>{this.props.quantity}</h1>
+                                </Col>
+                                <Col sm='3'>
+                                    <Button onClick={() => this.props.updateQuantity(1)}>+</Button>
+                                </Col>
+                            </Row>
+                        </Container>
                     </ModalBody>
                     <ModalFooter>
                         <Button type='submit'>Done</Button>
