@@ -96,7 +96,7 @@ export default class MenuItem extends Component<Props, State> {
                     {/* .toFixed(2) => specifiy 2 decimal places */}
                     <h3>${this.props.item.price.toFixed(2)}</h3>
                     {/* {this.props.user.isAdmin ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>} */}
-                    {localStorage.getItem('userRole') == 'admin' ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>}
+                    {localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>}
                     {/* {this.props.orderId != 0 ? <Button onClick={() => this.props.updateOrderItems(item)}>Add To Order</Button> : null} */}
                     {/* {this.props.orderId != 0 ? <Button onClick={() => this.addItemToOrder(item)}>Add To Order</Button> : null} */}
                     {this.props.orderId != 0 ? <Button onClick={this.toggleAddToOrder}>Add To Order</Button> : null}
