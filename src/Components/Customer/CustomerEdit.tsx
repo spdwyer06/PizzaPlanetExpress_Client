@@ -36,27 +36,43 @@ export default class CustomerEdit extends Component<Props, State> {
     async submitForm(e: React.FormEvent){
         e.preventDefault();
 
-        try{
-            const url = `${API_URL}/customer/${this.props.customer.id}`;
-            const options = {
-                method: 'PUT',
-                body: JSON.stringify({
-                    firstName: this.capitalizeName(this.state.updatedFirstName),
-                    lastName: this.capitalizeName(this.state.updatedLastName),
-                    phoneNumber: this.state.updatedPhoneNumber
-                }),
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Authorization': this.props.token   
-                })
-            };
+        const stringValues = /^[A-Za-z]+$/
 
-            await fetch(url, options);
-            this.props.mapCustomers();
-            this.props.toggleCustomerEdit();
+        if(!stringValues.test(this.state.updatedFirstName)){
+            alert('Enter a valid first name.');
         }
-        catch(err){
-            console.log('Error:', err.message);
+        else if(!stringValues.test(this.state.updatedLastName)){
+            alert('Enter a valid last name.');
+        }
+        else if(!Number(this.state.updatedPhoneNumber)){
+            alert('Enter a valid phone number.');
+        }
+        else if(this.state.updatedPhoneNumber.toString().length != 10){
+            alert('Enter a 10-digit phone number (include area code)');
+        }
+        else{
+            try{
+                const url = `${API_URL}/customer/${this.props.customer.id}`;
+                const options = {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        firstName: this.capitalizeName(this.state.updatedFirstName),
+                        lastName: this.capitalizeName(this.state.updatedLastName),
+                        phoneNumber: this.state.updatedPhoneNumber
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': this.props.token   
+                    })
+                };
+    
+                await fetch(url, options);
+                this.props.mapCustomers();
+                this.props.toggleCustomerEdit();
+            }
+            catch(err){
+                console.log('Error:', err.message);
+            }
         }
     }
 
