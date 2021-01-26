@@ -112,7 +112,7 @@ export default class OrderCreate extends Component<Props, State> {
 
                 {/* {this.state.customer.id == 0 ? <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} /> : null} */}
 
-                {this.state.customer.id == 0 ? <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} /> : <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} orderItems={this.state.orderItems} updateOrderItems={this.updateOrderItems} />}
+                {this.state.customer.id == 0 ? <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} /> : <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />}
             </div>
         );
     }

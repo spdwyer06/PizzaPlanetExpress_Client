@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {Button} from 'reactstrap';
+import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
 
 import API_URL from '../../env';
 import Order from './Order';
+import MenuItemList from '../MenuItem/MenuItemList';
 
 
 
@@ -18,7 +20,8 @@ type Props = {
 
 type State = {
     orders: [],
-    orderCreateOn: boolean
+    orderCreateOn: boolean,
+    orderId: number
 };
 
 export default class OrderList extends Component<Props, State> {
@@ -28,11 +31,13 @@ export default class OrderList extends Component<Props, State> {
     
         this.state = {
             orders: [],
-            orderCreateOn: false
+            orderCreateOn: false,
+            orderId: 0
         }
 
         this.toggleOrderCreate = this.toggleOrderCreate.bind(this);
         this.mapOrders = this.mapOrders.bind(this);
+        this.setOrderId = this.setOrderId.bind(this);
     }
 
     async mapOrders(){
@@ -96,14 +101,27 @@ export default class OrderList extends Component<Props, State> {
     // }
 
     toggleOrderCreate = () => this.setState({orderCreateOn: !this.state.orderCreateOn});
+
+    setOrderId = (orderId: number) => this.setState({orderId: orderId});
     
     render() {
         return (
             <div>
+
+            <Route exact path='/order/all'>
                 <h1>All Orders</h1>
                 <Button onClick={this.toggleOrderCreate}>Create New Order</Button>
-                {this.state.orders.map((order, i) => <Order token={this.props.token} user={this.props.user} order={order} key={i} mapOrders={this.mapOrders} />)}
+                {this.state.orders.map((order, i) => <Order token={this.props.token} user={this.props.user} order={order} key={i} mapOrders={this.mapOrders} setOrderId={this.setOrderId} />)}
                 {/* {console.log('Order List State:', this.state.orders)} */}
+            </Route>
+
+                <Switch>
+                    <Route exact path='/order/add'>
+                        <h2>Stuff n things</h2>
+                        <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />
+                    </Route> 
+                </Switch>
+
             </div>
         );
     }

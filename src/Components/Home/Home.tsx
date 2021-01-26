@@ -28,7 +28,7 @@ type Props = {
 }
 
 type State = {
-    testArr: MenuItemModel[],
+    // testArr: MenuItemModel[],
     orderId: number
 }
 
@@ -38,12 +38,12 @@ export default class Home extends Component<Props, State> {
         super(props)
     
         this.state = {
-            testArr: [],
+            // testArr: [],
             orderId: 0
         }
     }
     
-    updateOrderItems = (item: MenuItemModel) => console.log('MAY HAVE MESSED THIS UP');
+    // updateOrderItems = (item: MenuItemModel) => console.log('MAY HAVE MESSED THIS UP');
 
     updateCustomer = (customer: CustomerModel) => console.log('Blarg:', window.location.href);
 
@@ -67,15 +67,20 @@ export default class Home extends Component<Props, State> {
                                     {/* <OrderCreate token={this.props.token} /> */}
                                 </Route>
                                 {/* All Orders */}
-                                <Route path='/order/all' exact>
+                                <Route path='/order'>
                                     <OrderList token={this.props.token} user={this.props.user} />
                                 </Route>
                                 {/* All Menu Items */}
                                 <Route path='/menuItem/all' exact>
-                                    <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} orderItems={this.state.testArr} updateOrderItems={this.updateOrderItems} />
+                                    <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />
                                 </Route> 
                                 {/* Add Menu Item */}
                                 <Route path='/menuItem/create' exact component={MenuItemCreate} />
+{/* 
+                                <Route path='/order/add' exact>
+                                    <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />
+                                </Route>  */}
+
                             </Switch>
                         </Col>
                     </Row>

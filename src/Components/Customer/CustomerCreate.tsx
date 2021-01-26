@@ -40,8 +40,8 @@ export default class CustomerCreate extends Component<Props, State> {
             const options = {
                 method: 'POST',
                 body: JSON.stringify({
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
+                    firstName: this.capitalizeName(this.state.firstName),
+                    lastName: this.capitalizeName(this.state.lastName),
                     phoneNumber: this.state.phoneNumber
                 }),
                 headers: new Headers({
@@ -59,6 +59,7 @@ export default class CustomerCreate extends Component<Props, State> {
         }
     }
     
+    capitalizeName = (name: string) => name[0].toUpperCase() + name.slice(1);
 
     render() {
         return (
