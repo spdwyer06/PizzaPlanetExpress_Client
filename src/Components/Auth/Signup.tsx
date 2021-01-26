@@ -15,7 +15,7 @@ type Props = {
 type State = {
     firstName: string,
     lastName: string,
-    password: number | null
+    password: number
 };
 
 export default class Signup extends Component<Props, State> {
@@ -26,37 +26,57 @@ export default class Signup extends Component<Props, State> {
         this.state = {
             firstName: '',
             lastName: '',
-            password: null
+            password: 0
         }
     }
     
     async createUser(e: React.FormEvent){
         e.preventDefault();
-        const url = `${API_URL}/user/create`;
-        const options = {
-            method: 'POST',
-            body: JSON.stringify({
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                password: this.state.password
-            }),
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        };
 
-        try{
-            const res = await fetch(url, options);
-            if(res.status != 500){
-                this.props.toggleSignup();
-            }
-            else{
-                const r = await res.json();
-                console.log('Error:', r.Error.errors[0].message);
-            }
+        const stringValues = /^[A-Za-z]+$/
+
+        if(!stringValues.test(this.state.firstName)){
+            alert('Enter a valid first name.');
         }
-        catch(err){
-            console.log('Error:', err.message);
+        else if(!stringValues.test(this.state.lastName)){
+            alert('Enter a valid last name.');
+        }
+        else if(!Number(this.state.password)){
+            alert('Enter a valid password.');
+        }
+        else if(this.state.password.toString().length != 4){
+            alert('Enter a 4-digit password.');
+        }
+        else{
+            try{
+                const url = `${API_URL}/user/create`;
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        password: this.state.password
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                    })
+                };
+    
+                const res = await fetch(url, options);
+                if(res.status != 500){
+                    this.props.toggleSignup();
+                }
+                else{
+                    const r = await res.json();
+                    console.log('Error:', r.Error.errors[0].message);
+                    alert(`Error: ${r.Error.errors[0].message}`);
+                    // alert('Password already being used, select a different 4-digit password.');
+                }
+            }
+            catch(err){
+                console.log('Error:', err.message);
+                alert(`Error: ${err.message}`);
+            }
         }
     }
 
