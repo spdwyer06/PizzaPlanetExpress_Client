@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from 'reactstrap';
 
+import API_URL from '../../env';
 import CustomerEdit from './CustomerEdit';
 
 import CustomerModel from '../Models/CustomerModel';
@@ -48,16 +49,12 @@ export default class Customer extends Component<Props, State> {
 
         return (
             <div>
-                {/* <h3>{this.props.capitalizeName(customer.firstName)}</h3>
-                <h3>{this.props.capitalizeName(customer.lastName)}</h3> */}
-                {/* <h3>{this.props.capitalizeName(customer.lastName)}, {this.props.capitalizeName(customer.firstName)}</h3> */}
                 <h3>{this.props.capitalizeName(customer.firstName)} {this.props.capitalizeName(customer.lastName)}</h3>
-                {/* <h3>{customer.phoneNumber}</h3> */} 
                 <h3>{this.formatPhoneNumber(customer)}</h3>
                 {/* If the url isn't on order create, don't show the button */}
                 {window.location.href == 'http://localhost:3000/order/create' ?  <Button color='primary' onClick={() => this.props.updateCustomer(customer)}>Select Customer</Button> : null}
-                {/* <Button color='primary' onClick={() => this.props.updateCustomer(customer)}>Select Customer</Button> */}
-                <Button onClick={() => this.toggleCustomerEdit()}>Edit Customer Info</Button>
+                {window.location.href == 'http://localhost:3000/customer/all' ? <Button onClick={() => this.toggleCustomerEdit()}>Edit Customer Info</Button> : null}
+                {/* {window.location.href == `${API_URL}/customer/all` ? <Button onClick={() => this.toggleCustomerEdit()}>Edit Customer Info</Button> : null} */}
                 {this.state.editCustomerOn ? <CustomerEdit token={this.props.token} customer={this.props.customer} editCustomerOn={this.state.editCustomerOn} mapCustomers={this.props.mapCustomers} toggleCustomerEdit={this.toggleCustomerEdit} /> : null}
             </div>
         );

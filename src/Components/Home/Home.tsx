@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
-import {Button, Label, Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col} from 'reactstrap';
 import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
 
 import Navbar from './Navbar';
 import MenuItemList from '../MenuItem/MenuItemList';
-import MenuItemCreate from '../MenuItem/ItemCreate';
 import OrderList from '../Order/OrderList';
 import OrderCreate from '../Order/OrderCreate';
 import CustomerList from '../Customer/CustomerList';
 
-import MenuItemModel from '../Models/MenuItemModel';
+
+import CustomerModel from '../Models/CustomerModel';
+import UserModel from '../Models/UserModel';
 
 import './Home.css';
-import CustomerModel from '../Models/CustomerModel';
 
 
-
-type UserModel = {
-    isManager: boolean,
-    isAdmin: boolean
-};
 
 type Props = {
     logout: () => void,
@@ -28,7 +23,6 @@ type Props = {
 }
 
 type State = {
-    // testArr: MenuItemModel[],
     orderId: number
 }
 
@@ -38,13 +32,10 @@ export default class Home extends Component<Props, State> {
         super(props)
     
         this.state = {
-            // testArr: [],
             orderId: 0
         }
     }
     
-    // updateOrderItems = (item: MenuItemModel) => console.log('MAY HAVE MESSED THIS UP');
-
     updateCustomer = (customer: CustomerModel) => console.log('Blarg:', window.location.href);
 
     render() {
@@ -74,13 +65,6 @@ export default class Home extends Component<Props, State> {
                                 <Route path='/menuItem/all' exact>
                                     <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />
                                 </Route> 
-                                {/* Add Menu Item */}
-                                <Route path='/menuItem/create' exact component={MenuItemCreate} />
-{/* 
-                                <Route path='/order/add' exact>
-                                    <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />
-                                </Route>  */}
-
                             </Switch>
                         </Col>
                     </Row>

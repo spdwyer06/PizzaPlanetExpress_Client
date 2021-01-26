@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import API_URL from '../../env';
 import CustomerList from '../Customer/CustomerList';
 import MenuItemList from '../MenuItem/MenuItemList';
+
 import CustomerModel from '../Models/CustomerModel';
 import MenuItemModel from '../Models/MenuItemModel';
 import UserModel from '../Models/UserModel';
@@ -34,15 +35,9 @@ export default class OrderCreate extends Component<Props, State> {
             },
             orderItems: [],
             orderId: 0
-            // menuItems: [{
-            //     id: 0,
-            //     name: 'test',
-            //     price: 0
-            // }]
         }
 
         this.updateCustomer = this.updateCustomer.bind(this);
-        this.updateOrderItems = this.updateOrderItems.bind(this);
     }
     
     updateCustomer(newCustomer: CustomerModel){
@@ -54,16 +49,6 @@ export default class OrderCreate extends Component<Props, State> {
                 phoneNumber: newCustomer.phoneNumber
             }
         });
-    }
-
-    async updateOrderItems(menuItem: MenuItemModel){
-        // const newMenuItems: MenuItemModel[] = this.state.menuItems.push(menuItem);
-        // const newMenuItems: [MenuItemModel] = this.state.menuItems.;
-        await this.state.orderItems.push(menuItem);
-        console.log(this.state.orderItems);
-        // this.setState({
-        //     // menuItems: this.state.menuItems.push(menuItem)
-        // })
     }
 
     async createBaseOrder(){
@@ -83,11 +68,10 @@ export default class OrderCreate extends Component<Props, State> {
             };
     
             const res = await fetch(url, options);
-            // console.log('Baser Order res:', res);
             const resJson = await res.json();
-            // console.log('Base Order json:', resJson);
             const orderId = resJson.OrderId;
             console.log('Base Order id:', orderId);
+            
             await this.setState({
                 orderId: orderId
             });
@@ -106,12 +90,6 @@ export default class OrderCreate extends Component<Props, State> {
     render() {
         return (
             <div>
-                {/* {this.state.customer.id == 0 ? <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} /> : <MenuItemList token={this.props.token} user={this.props.user} orderItems={this.state.orderItems} updateOrderItems={this.updateOrderItems} />} */}
-
-                {/* {this.state.customer.id == 0 && this.state.orderId == 0 ? <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} /> : this.createBaseOrder() } */}
-
-                {/* {this.state.customer.id == 0 ? <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} /> : null} */}
-
                 {this.state.customer.id == 0 ? <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} /> : <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />}
             </div>
         );
