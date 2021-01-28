@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import {Button, Nav, NavItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
+import UserModel from '../Models/UserModel';
+
 import './Home.css';
 
 
 
 type Props = {
+    user: UserModel,
     logout: () => void
 };
 
@@ -27,9 +30,18 @@ export default class Navbar extends Component<Props, {}> {
                 <br />
                 <NavItem>
                     <Button id='btn' onClick={this.props.logout}>Logout</Button>
-                    {/* <Button id='blarg' onClick={this.props.logout}>Logout</Button> */}
                 </NavItem>
                 <br />
+                {localStorage.getItem('userRole') == 'admin' || localStorage.getItem('userRole') == 'manager' ? (
+                    <div>
+                        <NavItem>
+                            <Link to='/users/all'>
+                                <Button id='btn'>Employees</Button>
+                            </Link>
+                        </NavItem>
+                        <br />
+                    </div>
+                ) : null}
                 <NavItem>
                     <Link to='/customer/all'>
                         <Button id='btn'>Customers</Button>
