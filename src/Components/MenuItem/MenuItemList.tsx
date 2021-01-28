@@ -81,7 +81,7 @@ export default class MenuItemList extends Component<Props, State> {
         return (
             <div>
                 <h1>All Menu Items</h1>
-                {localStorage.getItem('userRole') == 'admin' ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
+                {localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
                 {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} orderId={this.props.orderId} capName={this.capitalizeName} key={i} refreshMenu={this.mapItems} />)}
                 {this.state.createOn ? <MenuItemCreate user={this.props.user} token={this.props.token} createOn={this.state.createOn} toggleCreate={this.toggleCreate} capitalizeName={this.capitalizeName} /> : <></>}
             </div>

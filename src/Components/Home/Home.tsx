@@ -40,13 +40,13 @@ export default class Home extends Component<Props, State> {
 
     render() {
         return (
-            <Container fluid>
+            <Container fluid className='wasd'>
                 <Router>
-                    <Row>
+                    <Row className='mainRow'>
                         <Col sm='3'>
                             <Navbar logout={this.props.logout} />
                         </Col>
-                        <Col sm='9'>
+                        <Col className='qwer' sm='9'>
                             <Switch>
                                 {/* All Customers */}
                                 <Route path='/customer/all' exact>

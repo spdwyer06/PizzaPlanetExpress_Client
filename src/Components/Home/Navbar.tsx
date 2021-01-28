@@ -26,30 +26,31 @@ export default class Navbar extends Component<Props, {}> {
             <Nav vertical>
                 <br />
                 <NavItem>
-                    <Button onClick={this.props.logout}>Logout</Button>
+                    <Button id='btn' onClick={this.props.logout}>Logout</Button>
+                    {/* <Button id='blarg' onClick={this.props.logout}>Logout</Button> */}
                 </NavItem>
                 <br />
                 <NavItem>
                     <Link to='/customer/all'>
-                        <Button>View Customers</Button>
+                        <Button id='btn'>Customers</Button>
                     </Link>
                 </NavItem>
                 <br />
                 <NavItem>
                     <Link to='/order/create'>
-                        <Button>Start A New Order</Button>
+                        <Button id='btn'>New Order</Button>
                     </Link>
                 </NavItem>
                 <br />
                 <NavItem>
                     <Link to='/order/all'>
-                        <Button>View All Orders</Button>
+                        <Button id='btn'>Orders</Button>
                     </Link>
                 </NavItem>
                 <br />
                 <NavItem>
                     <Link to='/menuItem/all'>
-                        <Button>View All Menu Items</Button>
+                        <Button id='btn'>Menu Items</Button>
                     </Link>
                 </NavItem>
             </Nav>

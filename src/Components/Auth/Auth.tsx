@@ -48,7 +48,7 @@ export default class Auth extends Component<Props, State> {
 
     render() {
         return (
-            <Modal isOpen={true}>
+            <Modal id='authModal' isOpen={true}>
                 <Button id='authSignupBtn' onClick={() => this.toggleSignup()}>Create New User</Button>
                 <br />
                 <Button id='authLoginBtn' onClick={() => this.toggleLogin()}>Employee Login</Button>

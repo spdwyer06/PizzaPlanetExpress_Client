@@ -40,7 +40,7 @@ export default class OrderList extends Component<Props, State> {
     }
 
     async mapOrders(){
-        console.log('OrderList Token:', this.props.token);
+        // console.log('OrderList Token:', this.props.token);
 
         try{
             const url = `${API_URL}/order/all`;
@@ -62,6 +62,7 @@ export default class OrderList extends Component<Props, State> {
             }
             else{
                 console.log('No orders');
+                await this.setState({orders: []})
             }
         }
         catch(err){
@@ -73,6 +74,13 @@ export default class OrderList extends Component<Props, State> {
         this.mapOrders();
     }
 
+    // componentDidUpdate(prevProps: Props, prevState: State){
+    //     if(prevState.orders.length != this.state.orders.length){
+    //         console.log('Stuff has changed');
+    //         this.mapOrders();
+    //     }
+    // }
+    
     toggleOrderCreate = () => this.setState({orderCreateOn: !this.state.orderCreateOn});
 
     setOrderId = (orderId: number) => this.setState({orderId: orderId});

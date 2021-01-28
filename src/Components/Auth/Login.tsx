@@ -95,7 +95,7 @@ export default class Login extends Component<Props, State> {
                     <Container>
                         <Row>
                             <Col sm='10'>
-                                <h4 className='test'>Enter Your Password</h4>
+                                <h4>Enter Your Password</h4>
                             </Col>
                             <Col sm='2'>
                                 <Button onClick={this.props.toggleLogin} color='danger'>X</Button>
@@ -113,43 +113,43 @@ export default class Login extends Component<Props, State> {
                     <Row>
                         <Col xs='3'></Col>
                         <Col className='col1' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e: React.MouseEvent<HTMLElement>) => this.setPass(e)} value='1'>1</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e: React.MouseEvent<HTMLElement>) => this.setPass(e)} value='1'>1</Button> : <></>}
                         </Col>
                         <Col className='col2' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='2'>2</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='2'>2</Button> : <></>}
                         </Col>
                         <Col className='col3 numBtn' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='3'>3</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='3'>3</Button> : <></>}
                         </Col>
                     </Row>
                     <Row>
                         <Col xs='3'></Col>
                         <Col className='col1' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='4'>4</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='4'>4</Button> : <></>}
                         </Col>
                         <Col className='col2' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='5'>5</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='5'>5</Button> : <></>}
                         </Col>
                         <Col className='col3' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='6'>6</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='6'>6</Button> : <></>}
                         </Col>
                     </Row>
                     <Row>
                         <Col xs='3'></Col>
                         <Col className='col1' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='7'>7</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='7'>7</Button> : <></>}
                         </Col>
                         <Col className='col2' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='8'>8</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='8'>8</Button> : <></>}
                         </Col>
                         <Col className='col3' xs='auto'>
-                            {this.state.password.length < 4 ? <Button onClick={(e) => this.setPass(e)} value='9'>9</Button> : <></>}
+                            {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='9'>9</Button> : <></>}
                         </Col>
                     </Row>
                     <Row>
                         <Col xs='3'></Col>
                         <Col className='col1' xs='auto'>
-                            <Button onClick={() => this.removeLastNum()}><img id='backspace' src={Backspace} /></Button>
+                            <Button id='loginNumBtn' onClick={() => this.removeLastNum()}><img id='backspace' src={Backspace} /></Button>
                         </Col>
                         <Col className='col2' xs='auto'>
                             {this.state.password.length == 4 ? <Button type='submit' className='loginBtn' onClick={() => this.login()}>Login</Button> : <></>}

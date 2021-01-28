@@ -2,3 +2,35 @@
     background-color: blueviolet;
     height: 100vh;
 }
+
+#btn{
+    height: 110px;
+    width:110px;
+    border: 13px solid #6f5570;
+    background-color: #dd4aed;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+}
+
+#custBtn{
+    height: 80px;
+    width: 80px;
+    border: 13px solid #6f5570;
+    background-color: #dd4aed;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+}
+
+.wasd{
+    background-color: aquamarine;
+}
+
+.qwer{
+    background-color: chartreuse;
+}
+
+.mainRow{
+    height: 100vh;
+}
