@@ -21,7 +21,12 @@ There are currently a total of 5 database tables being utilized, with multiple d
    * If the customer isn't shown then you can create a new entry in the database to save the customer info for future orders
 * Once a customer has been selected then you can choose the menu items you would like to add to the order
 * The order can have the selected menu items edited easily
-  
+
+## User Roles
+---
+--- 
+### Admin
+---
 * Special admin privileges include:
    * Create/Edit/Delete menu items
    * Edit/Delete user accounts
