@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Pizza Planet Express
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is my Web Development Red Badge project for Eleven Fifty Academy.
 
-## Available Scripts
+The application was designed to replicate a pizza restaurant point of sales system, but can have the menu items easily swapped out to represent any point of sales system needed.
+There are currently a total of 5 database tables being utilized, with multiple database relationships.
 
-In the project directory, you can run:
+## To Use The Application
+---
+* Make sure to also have the server and client repositories cloned
+    * Client: [Link] (https://github.com/spdwyer06/PizzaPlanetExpress_Client)
+    * Server: [Link] (https://github.com/spdwyer06/PizzaPlanetExpress_Server)
+* Start the server by running the command 'nodemon' in the terminal
+* Start the client by running the command 'npm start' in the terminal
+* To access the application you must create an account
+  * The first user created in the database will be given admin privileges
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies Used
+---
+* JavaScript
+* Typescript
+* React
+* React Class Components
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Key Node Pacakages Used
+---
+* express
+* moment
+* react-router
+* reactstrap
+* jsonwebtoken
+* bcrypt
+* nodemon
+* sequelize
 
-### `npm test`
+Contact Me
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
