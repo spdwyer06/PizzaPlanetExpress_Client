@@ -24,15 +24,21 @@ There are currently a total of 5 database tables being utilized, with multiple d
 
 ## User Roles
 ---
---- 
 ### Admin
----
-* Special admin privileges include:
+* Special privileges include:
    * Create/Edit/Delete menu items
    * Edit/Delete user accounts
    * Delete customer records 
    * Delete orders
-* Basic privileges include:
+   
+### Manager
+* Special privileges include:
+   * Edit/Delete user accounts
+   * Delete customer records
+   * Delete orders
+
+### Employee
+* Employee privileges include:
    * Create/Update customer records
    * Create/Edit orders
 
