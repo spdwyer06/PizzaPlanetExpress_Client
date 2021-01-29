@@ -38,7 +38,7 @@ There are currently a total of 5 database tables being utilized, with multiple d
    * Delete orders
 
 ### Employee
-* Employee privileges include:
+* Basic privileges include:
    * Create/Update customer records
    * Create/Edit orders
 
