@@ -3,10 +3,13 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col
 import {Link} from 'react-router-dom';
 
 import API_URL from '../../env';
+import OderDetailItem from './OrderDetailItem';
 
 import OrderModel from '../Models/OrderModel';
 import UserModel from '../Models/UserModel';
 import MenuItemModel from '../Models/MenuItemModel';
+import OrderDetailItems from './OrderDetailItem';
+import OrderDetailItem from './OrderDetailItem';
 
 
 
@@ -21,7 +24,8 @@ type Props = {
 };
 
 type State = {
-    isPaid: string
+    isPaid: string,
+    toggleEditItemOn: boolean
 };
 
 export default class OrderDetail extends Component<Props, State> {
@@ -30,8 +34,11 @@ export default class OrderDetail extends Component<Props, State> {
         super(props)
     
         this.state = {
-            isPaid: ''
+            isPaid: '',
+            toggleEditItemOn: false
         }
+
+        this.toggleEditItem = this.toggleEditItem.bind(this);
     }
     
     mapOrderDetail(order: OrderModel){
@@ -72,6 +79,8 @@ export default class OrderDetail extends Component<Props, State> {
         return `(${areaCode}) ${firstThree}-${finalFour}`;
     }
 
+    toggleEditItem = async() => await this.setState({toggleEditItemOn: !this.state.toggleEditItemOn});
+
     updateOrderItems = (item: MenuItemModel) => console.log('Hazaah from OrderDetail');
 
     addToOrder = async() => this.props.setOrderId(this.props.order.id);
@@ -103,6 +112,8 @@ export default class OrderDetail extends Component<Props, State> {
     setIsPaid = async(order: OrderModel) => order.isPaid ? await this.setState({isPaid: 'Yes'}) : await this.setState({isPaid: 'No'})
     
     componentDidMount(){
+        console.log('Order Details:', this.props.order.menuItems);
+
         this.setIsPaid(this.props.order);
     }
 
@@ -168,20 +179,32 @@ export default class OrderDetail extends Component<Props, State> {
                                     <h6>Item Name</h6>
                                 </Col>
                             </Row>
-                            {order.menuItems.map((menuItem, i) => {
+                            {order.menuItems.map((menuItem) => <OrderDetailItem token={this.props.token} menuItem={menuItem} orderId={order.id} orderPrice={order.totalPrice} mapOrders={this.props.mapOrders} />)}
+
+                            {/* {order.menuItems.map((menuItem, i) => {
                                 return(
                                     <Row key={i}>
+                                        <Row>
                                         <Col>
                                             <pre>
                                                 <h6>{menuItem.name}   X   {menuItem.orderItem.quantity}</h6>
                                             </pre>
                                         </Col>
                                         <Col>
+                                        <pre>
                                             <h6>{menuItem.price * menuItem.orderItem.quantity}</h6>
+                                        </pre>
                                         </Col>
+                                        <Col>
+                                            <pre>
+                                                <Button onClick={() => this.toggleEditItem()}>Edit</Button>
+                                            </pre>
+                                        </Col>
+                                        </Row>
                                     </Row>
                                 );
-                            })}
+                            })} */}
+                            {this.state.toggleEditItemOn ? <Row><h3>quantity</h3></Row> : null}
                             <Row>
                                 <Col>
                                     <h3>Order Total: ${order.totalPrice.toFixed(2)}</h3>

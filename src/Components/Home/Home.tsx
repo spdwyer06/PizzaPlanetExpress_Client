@@ -7,6 +7,7 @@ import MenuItemList from '../MenuItem/MenuItemList';
 import OrderList from '../Order/OrderList';
 import OrderCreate from '../Order/OrderCreate';
 import CustomerList from '../Customer/CustomerList';
+import UserList from '../User/UserList';
 
 
 import CustomerModel from '../Models/CustomerModel';
@@ -36,18 +37,22 @@ export default class Home extends Component<Props, State> {
         }
     }
     
-    updateCustomer = (customer: CustomerModel) => console.log('Blarg:', window.location.href);
+    updateCustomer = (customer: CustomerModel) => console.log('Just here to fulfill the props');
 
     render() {
         return (
-            <Container fluid>
+            <Container fluid className='wasd'>
                 <Router>
-                    <Row>
+                    <Row className='mainRow'>
                         <Col sm='3'>
-                            <Navbar logout={this.props.logout} />
+                            <Navbar logout={this.props.logout} user={this.props.user} />
                         </Col>
-                        <Col sm='9'>
+                        <Col className='qwer' sm='9'>
                             <Switch>
+                                {/* All Employees */}
+                                <Route exact path='/users/all'>
+                                    <UserList token={this.props.token} />
+                                </Route>
                                 {/* All Customers */}
                                 <Route path='/customer/all' exact>
                                     <CustomerList token={this.props.token} updateCustomer={this.updateCustomer} />

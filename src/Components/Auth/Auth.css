@@ -1,40 +1,55 @@
-.test{
-    color:blueviolet;
-    text-align: center;
-}
+/**************************/
+/*   Auth Compoonent     */
+/**************************/
 
-.loginContainer{
-    background-color: cadetblue;
+#authModal{
+    background-color: chartreuse;
 }
 
 #authSignupBtn{
     width: 200px;
     margin-left: auto;
     margin-right: auto;
-    /* border-radius: 50%; */
+    border: 13px solid #6f5570;
+    background-color: #dd4aed;
+    color: white;
+    font-size: 15px;
+    text-align: center;
 }
 
 #authLoginBtn{
     width: 200px;
     margin-left: auto;
     margin-right: auto;
+    border: 13px solid #6f5570;
+    background-color: #dd4aed;
+    color: white;
+    font-size: 15px;
+    text-align: center;
 }
 
 /**************************/
 /*   Login Compoonent     */
 /**************************/
 
-/* button{
-    height: 75px;
-    width: 75px;
-    border: 5px solid black;
-} */
 
-.btn{
-    height: 75px;
-    width: 75px;
-    border: 2px solid black;
+.loginContainer{
+    background-color: cadetblue;
 }
+
+
+#loginNumBtn{
+    /* height: 75px;
+    width: 75px;
+    border: 2px solid black; */
+    height: 80px;
+    width: 80px;
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+    font-size: 30px;
+}
+
 
 .loginBtn{
     height: 75px;
@@ -42,23 +57,21 @@
 }
 
 .col1{
-    /* background-color: chartreuse; */
-    /* text-align: right; */
+    background-color: #dd4aed;
+    margin-bottom: 2px;
+}
+
+/* .col1{
     padding: 2px;
-    /* margin-right: 0; */
 }
 
 .col2{
-    /* background-color: cornflowerblue; */
     padding: 2px;
-    /* white-space: nowrap; */
 }
 
 .col3{
-    /* background-color: crimson; */
-    /* text-align: left; */
     padding: 2px;
-}
+} */
 
 .loginContainer{
     background-color: cadetblue; 
@@ -83,6 +96,9 @@
 #backspace{
     height: 40px;
     width: 50px;
+    position: relative;
+    margin-right: 20%;
+    /* margin-left: auto */
 }
 
 

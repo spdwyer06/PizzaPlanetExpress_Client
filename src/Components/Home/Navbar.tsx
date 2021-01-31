@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import {Button, Nav, NavItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
+import UserModel from '../Models/UserModel';
+
 import './Home.css';
 
 
 
 type Props = {
+    user: UserModel,
     logout: () => void
 };
 
@@ -26,30 +29,40 @@ export default class Navbar extends Component<Props, {}> {
             <Nav vertical>
                 <br />
                 <NavItem>
-                    <Button onClick={this.props.logout}>Logout</Button>
+                    <Button id='btn' onClick={this.props.logout}>Logout</Button>
                 </NavItem>
                 <br />
+                {localStorage.getItem('userRole') == 'admin' || localStorage.getItem('userRole') == 'manager' ? (
+                    <div>
+                        <NavItem>
+                            <Link to='/users/all'>
+                                <Button id='btn'>Employees</Button>
+                            </Link>
+                        </NavItem>
+                        <br />
+                    </div>
+                ) : null}
                 <NavItem>
                     <Link to='/customer/all'>
-                        <Button>View Customers</Button>
+                        <Button id='btn'>Customers</Button>
                     </Link>
                 </NavItem>
                 <br />
                 <NavItem>
                     <Link to='/order/create'>
-                        <Button>Start A New Order</Button>
+                        <Button id='btn'>New Order</Button>
                     </Link>
                 </NavItem>
                 <br />
                 <NavItem>
                     <Link to='/order/all'>
-                        <Button>View All Orders</Button>
+                        <Button id='btn'>Orders</Button>
                     </Link>
                 </NavItem>
                 <br />
                 <NavItem>
                     <Link to='/menuItem/all'>
-                        <Button>View All Menu Items</Button>
+                        <Button id='btn'>Menu Items</Button>
                     </Link>
                 </NavItem>
             </Nav>

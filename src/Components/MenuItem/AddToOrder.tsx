@@ -22,7 +22,6 @@ export default class AddToOrder extends Component<Props> {
         }
     }
     
-
     render() {
         return (
             <Modal isOpen={this.props.addToOrderOn}>
@@ -40,15 +39,6 @@ export default class AddToOrder extends Component<Props> {
                 </ModalHeader>
                 <Form onSubmit={this.props.addItemToOrder}>
                     <ModalBody>
-                        {/* Taken out until ability to add multiple of the same items to an order is complete */}
-                        {/* <FormGroup>
-                            <Label for='specialInstructions'>Special Instructions:</Label>
-                            <Input name='specialInstructions' id='specialInstructionsInput' required onChange={(e) => this.props.updateSpecialInstructions(e.target.value)} />
-                        </FormGroup> */}
-                        {/* <FormGroup>
-                            <Label for='quantity'>Quantity:</Label>
-                            <Input name='quantity' id='quantityInput' required onChange={(e) => this.props.updateQuantity(parseInt(e.target.value))} />
-                        </FormGroup> */}
                         <Container>
                             <Row>
                                 <Col sm='3'>

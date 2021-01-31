@@ -40,8 +40,8 @@ export default class OrderCreate extends Component<Props, State> {
         this.updateCustomer = this.updateCustomer.bind(this);
     }
     
-    updateCustomer(newCustomer: CustomerModel){
-        this.setState({
+    async updateCustomer(newCustomer: CustomerModel){
+        await this.setState({
             customer: {
                 id: newCustomer.id,
                 firstName: newCustomer.firstName,
