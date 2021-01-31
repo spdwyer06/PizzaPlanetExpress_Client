@@ -2,6 +2,7 @@
 
 *env.js
 *wontFuckingWork.tsx
+*.eslintcache
 
 # dependencies
 /node_modules
