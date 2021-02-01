@@ -1,0 +1,66 @@
+/*************************/
+/*    User Compoonent    */
+/*************************/
+
+#viewDetailsBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.user{
+    background-color: whitesmoke;
+    opacity: 0.7;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10%;
+}
+
+
+/****************************/
+/*  User Detail Compoonent  */
+/****************************/
+
+#cancelBtn{
+    height: 40px;
+    width: 40px;
+    margin-bottom: 22px;
+}
+
+#editUserBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+#deleteUserBtn{
+    width: 300px;
+    border: 13px solid #04614b;
+    color: #FFFDD0;
+}
+
+.userDetailModal{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+}
+
+.rowSpacing{
+    margin-bottom: 22px;
+}
+
+
+/****************************/
+/*  User Edit Compoonent  */
+/****************************/
+
+#submitEditBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.userEditModal{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+    font-size: 25px;
+}

@@ -4,6 +4,8 @@ import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, M
 import API_URL from '../../env';
 import EmployeeModel from '../Models/EmployeeModel';
 
+import './user.css';
+
 
 
 type Props = {
@@ -84,7 +86,57 @@ export default class UserEdit extends Component<Props, State> {
         const employee = this.props.employee;
 
         return (
-            <Modal isOpen={this.props.editEmployeeOn}>
+            <Modal contentClassName='userEditModal' isOpen={this.props.editEmployeeOn}>
+                <Container>
+                    <Row className='rowSpacing'>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' onClick={this.props.toggleEditEmployeeOn} color='danger'>X</Button>
+                        </Col>
+                    </Row>
+                    <Form onSubmit={(e) => this.submitForm(e)}>
+                        <FormGroup>
+                            <Label for='itemId'>Employee Id: {employee.id}</Label>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for='employeeFirstName'>Employee First Name:</Label>
+                            <Input name='employeeFirstName' className='rowSpacing' required placeholder={employee.firstName} onChange={e => this.setState({updatedFirstName: e.target.value})} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for='employeeLastName'>Employee Last Name:</Label>
+                            <Input name='employeeLastName' className='rowSpacing' required placeholder={employee.lastName} onChange={e => this.setState({updatedLastName: e.target.value})} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for='employeePassword'>Password:</Label>
+                            <Input name='employeePassword' className='rowSpacing' required placeholder={(employee.password).toString()} onChange={e => this.setState({updatedPassword: parseInt(e.target.value)})} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Row className='rowSpacing'>
+                                <Col className='text-center' sm='6'>
+                                    <Label check>
+                                        <Input type='checkbox' name='isManager' defaultChecked={employee.isManager} onChange={e => this.setState({updatedIsManager: e.target.checked})} />{' Manager? '}
+                                    </Label>
+                                </Col>
+                                <Col className='text-center' sm='6'>
+                                    <Label check>
+                                        <Input type='checkbox' name='isAdmin' defaultChecked={employee.isAdmin} onChange={e => this.setState({updatedIsAdmin: e.target.checked})} />{' Admin? '}
+                                    </Label>
+                                </Col>
+                            </Row>
+                        </FormGroup>
+                        <Row className='rowSpacing'>
+                            <Col className='text-center'>
+                                <Button id='submitEditBtn' type='submit'>Done</Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Container>
+            </Modal>
+        );
+    }
+}
+
+/*
+<Modal isOpen={this.props.editEmployeeOn}>
                 <ModalHeader>
                     <Container>
                         <Row>
@@ -136,6 +188,4 @@ export default class UserEdit extends Component<Props, State> {
                     </ModalFooter>
                 </Form>
             </Modal>
-        );
-    }
-}
+*/

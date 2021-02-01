@@ -4,7 +4,7 @@ import {Button, Row, Col} from 'reactstrap';
 import EmployeeModel from '../Models/EmployeeModel';
 import UserDetail from './UserDetail';
 
-
+import './user.css';
 
 type Props = {
     token: string,
@@ -35,17 +35,11 @@ export default class User extends Component<Props, State>{
         const employee = this.props.employee;
 
         return (
-            <div>
-                <Row>
-                    <Col sm='6'>
-                        <h3>{this.capitalizeName(employee.firstName)} {this.capitalizeName(employee.lastName)}</h3>
-                    </Col>
-                    <Col sm='3'>
-                        <Button onClick={() => this.toggleEmployeeDetailOn()}>View Details</Button>
-                    </Col>
-                </Row>
+            <Col className='user' sm='3'>
+                <h3>{this.capitalizeName(employee.firstName)} {this.capitalizeName(employee.lastName)}</h3>
+                <Button id='viewDetailsBtn' onClick={() => this.toggleEmployeeDetailOn()}>View Details</Button>
                 {this.state.employeeDetailOn ? <UserDetail token={this.props.token} employee={this.props.employee} employeeDetailOn={this.state.employeeDetailOn} toggleEmployeeDetailOn={this.toggleEmployeeDetailOn} capitalizeName={this.capitalizeName} getAllEmployees={this.props.getAllEmployees} /> : null}
-            </div>
+            </Col>
         );
     }
 }

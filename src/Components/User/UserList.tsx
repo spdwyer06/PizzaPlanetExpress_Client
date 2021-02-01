@@ -70,11 +70,8 @@ export default class UserList extends Component<Props, State> {
         return (
             <Container>
                 <Row>
-                    <Col>
-                        <h1>Employee List</h1>
-                    </Col>
+                    {this.state.employees.map(employee => <User token={this.props.token} employee={employee} getAllEmployees={this.getAllEmployees} />)}
                 </Row>
-                {this.state.employees.map(employee => <User token={this.props.token} employee={employee} getAllEmployees={this.getAllEmployees} />)}
             </Container>
         );
     }

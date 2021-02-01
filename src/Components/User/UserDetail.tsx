@@ -6,6 +6,8 @@ import UserEdit from './UserEdit';
 
 import EmployeeModel from '../Models/EmployeeModel';
 
+import './user.css';
+
 
 
 type Props = {
@@ -73,68 +75,54 @@ export default class UserDetail extends Component<Props, State> {
         const employee = this.props.employee;
 
         return (
-            <Modal isOpen={this.props.employeeDetailOn}>
-                <ModalHeader>
-                    <Container>
-                        <Row>
-                            <Col sm='10'>
-                                <h3>Employee Detail</h3>
-                            </Col>
-                            <Col sm='2'>
-                                <Button onClick={() => this.props.toggleEmployeeDetailOn()} color='danger'>X</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalHeader>
-                <ModalBody>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <h3>Employee Id: {employee.id}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>First Name: {this.props.capitalizeName(employee.firstName)}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Last Name: {this.props.capitalizeName(employee.lastName)}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Password: {employee.password}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Manager? {this.state.isManager}</h3>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h3>Admin? {this.state.isAdmin}</h3>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalBody>
-                <ModalFooter>
-                    <Container>
-                        <Row>
-                            <Col sm='4'>
-                                <Button color='primary' onClick={() => this.toggleEditEmployeeOn()}>Edit</Button>
-                            </Col>
-                            <Col sm='8'>
-                                <Button color='danger' onClick={() => this.deleteEmployee()}>Delete Employee From System</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalFooter>
+            <Modal contentClassName='userDetailModal' isOpen={this.props.employeeDetailOn}>
+                <Container>
+                    <Row className='rowSpacing'>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' onClick={() => this.props.toggleEmployeeDetailOn()} color='danger'>X</Button>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Employee Id: {employee.id}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>First Name: {this.props.capitalizeName(employee.firstName)}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Last Name: {this.props.capitalizeName(employee.lastName)}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Password: {employee.password}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Manager? {this.state.isManager}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Admin? {this.state.isAdmin}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col className='text-left'>
+                            <Button id='editUserBtn' color='primary' onClick={() => this.toggleEditEmployeeOn()}>Edit</Button>
+                        </Col>
+                        <Col className='text-right'>
+                            <Button id='deleteUserBtn' color='danger' onClick={() => this.deleteEmployee()}>Delete Employee From System</Button>
+                        </Col>
+                    </Row>
+                </Container>
                 {this.state.editEmployeeOn ? <UserEdit token={this.props.token} employee={this.props.employee} editEmployeeOn={this.state.editEmployeeOn} toggleEditEmployeeOn={this.toggleEditEmployeeOn} toggleEmployeeDetailOn={this.props.toggleEmployeeDetailOn} /> : null}
             </Modal>
         );
     }
 }
-
