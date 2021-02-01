@@ -4,6 +4,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col
 import API_URL from '../../env';
 import MenuItemModel from "../Models/MenuItemModel";
 
+import './order.css';
+
 
 
 type Props = {
@@ -99,6 +101,53 @@ export default class OrderDetailItem extends Component<Props, State> {
             <Row key={menuItem.id}>
                 <Col>
                     <pre>
+                        <h6 className='orderItem'>{menuItem.name} X {this.state.quantity}</h6>
+                    </pre>
+                </Col>
+                <Col>
+                    <pre>
+                        <h6 className='orderItem'>${(menuItem.price * this.state.quantity).toFixed(2)}</h6>
+                    </pre>
+                </Col>
+                <Col>
+                    <pre>
+                        {!this.state.editItemOn ? <Button id='editOrderItemBtn' onClick={() => this.toggleEditItemOn()}>Edit</Button> : <Button id='cancelBtn' color='danger' onClick={() => this.toggleEditItemOn()}>X</Button>}
+                    </pre>
+                </Col>
+            </Row>
+            {this.state.editItemOn ? (
+                <div>
+
+                <Row>
+                    <Col sm='2'>
+                        {this.state.quantity > 0 ? <Button id='editItemQuantityBtn' onClick={() => this.updateQuantity(-1)}>-</Button> : null}
+                    </Col>
+                    <Col sm='2' className='text-center'>
+                        <h1 className='orderItem'>{this.state.quantity}</h1>
+                    </Col>
+                    <Col sm='2'>
+                        <Button id='editItemQuantityBtn' onClick={() => this.updateQuantity(1)}>+</Button>
+                    </Col>
+                    <Col sm='6'>
+                        <Button id='submitItemQuantityBtn' onClick={(e) => this.updateOrderItem(e)}>Done</Button>
+                    </Col>
+                </Row>
+                <Row>
+                    {this.state.quantity != this.props.menuItem.orderItem.quantity ? <h6 className='orderItem'>New Order Total: ${(this.props.orderPrice + ((this.state.quantity - menuItem.orderItem.quantity) * menuItem.price)).toFixed(2)}</h6> :null}
+                </Row>
+                </div>
+            ) : null}
+        </div>
+      
+    );
+  }
+}
+
+/*
+<div>
+            <Row key={menuItem.id}>
+                <Col>
+                    <pre>
                         <h6>{menuItem.name} X {this.state.quantity}</h6>
                     </pre>
                 </Col>
@@ -136,7 +185,4 @@ export default class OrderDetailItem extends Component<Props, State> {
                 </div>
             ) : null}
         </div>
-      
-    );
-  }
-}
+*/

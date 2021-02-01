@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'reactstrap';
+import {Button, Col} from 'reactstrap';
 
 import OrderDetail from './OrderDetail';
 import API_URL from '../../env';
@@ -7,7 +7,7 @@ import API_URL from '../../env';
 import OrderModel from '../Models/OrderModel';
 import UserModel from '../Models/UserModel';
 
-
+import './order.css';
 
 type Props = {
     order: OrderModel,
@@ -69,13 +69,13 @@ export default class Order extends Component<Props, State> {
         const {order} = this.props;
 
         return (
-            <div>
+            <Col className='order' sm='3'>
                 <h3>Customer Name: {order.customer.lastName}, {order.customer.firstName}</h3>
                 <h3>Order Price: ${order.totalPrice.toFixed(2)}</h3>
-                {localStorage.getItem('userRole') == 'manager' || localStorage.getItem('userRole') == 'admin' ? <Button color='danger' onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null}
-                <Button onClick={this.toggleOrderInfo}>View</Button>
+                <Button id='viewDetailBtn' onClick={this.toggleOrderInfo}>View</Button>
+                {localStorage.getItem('userRole') == 'manager' || localStorage.getItem('userRole') == 'admin' ? <Button id='deleteOrderBtn' color='danger' onClick={(e) => this.deleteOrder(e)}>Delete Order</Button> : null}
                 {this.state.orderInfoOn ? <OrderDetail token={this.props.token} user={this.props.user} mapOrders={this.props.mapOrders} toggleInfo={this.toggleOrderInfo}  orderInfoOn={this.state.orderInfoOn} order={order} setOrderId={this.props.setOrderId} /> : null}
-            </div>
+            </Col>
         );
     }
 }

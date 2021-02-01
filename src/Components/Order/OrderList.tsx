@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {Container, Row, Col} from 'reactstrap';
 
 import API_URL from '../../env';
 import Order from './Order';
@@ -87,21 +88,20 @@ export default class OrderList extends Component<Props, State> {
     
     render() {
         return (
-            <div>
+            <Container>
+                <Row>
+                    <Route exact path='/order/all'>
+                        {this.state.orders.length > 0 ? this.state.orders.map((order, i) => <Order token={this.props.token} user={this.props.user} order={order} key={i} mapOrders={this.mapOrders} setOrderId={this.setOrderId} />) : <h3 className='noOrders'>No orders yet</h3>}
+                    </Route>
+                </Row>
 
-                <Route exact path='/order/all'>
-                    <h1>All Orders</h1>
-                    {this.state.orders.length > 0 ? this.state.orders.map((order, i) => <Order token={this.props.token} user={this.props.user} order={order} key={i} mapOrders={this.mapOrders} setOrderId={this.setOrderId} />) : <h3>No orders yet</h3>}
-                </Route>
-
+                {/* Switch for inner nested route */}
                 <Switch>
                     <Route exact path='/order/add'>
                         <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />
                     </Route> 
                 </Switch>
-
-            </div>
+            </Container>
         );
     }
 }
-

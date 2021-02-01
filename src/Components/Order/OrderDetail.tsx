@@ -11,6 +11,8 @@ import MenuItemModel from '../Models/MenuItemModel';
 import OrderDetailItems from './OrderDetailItem';
 import OrderDetailItem from './OrderDetailItem';
 
+import './order.css';
+
 
 
 type Props = {
@@ -122,111 +124,77 @@ export default class OrderDetail extends Component<Props, State> {
         console.log('Order Prop:', order);
 
         return(
-            <div>
-                <Modal isOpen={this.props.orderInfoOn}>
-                    {console.log('Order Prop:', order)}
-                    <ModalHeader>
-                        <Container>
-                            <Row>
-                                <Col sm='10'>
-                                    <h3>Order Detail</h3>
-                                </Col>
-                                <Col sm='2'>
-                                    <Button onClick={this.props.toggleInfo} color='danger'>X</Button>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </ModalHeader>
-                    <ModalBody>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <h3>Order Id: {order.id}</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3>Date Order Taken: {this.getOrderDate(order)}</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3>Order Taken At: {this.getOrderTime(order)}</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3>Order Taken By: {order.user.firstName} {order.user.lastName}</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3>Customer: {order.customer.firstName} {order.customer.lastName}</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h6>Phone Number: {this.formatPhoneNumber(order)}</h6>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3>Order Detail:</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h6>Item Name</h6>
-                                </Col>
-                            </Row>
-                            {order.menuItems.map((menuItem) => <OrderDetailItem token={this.props.token} menuItem={menuItem} orderId={order.id} orderPrice={order.totalPrice} mapOrders={this.props.mapOrders} />)}
-
-                            {/* {order.menuItems.map((menuItem, i) => {
-                                return(
-                                    <Row key={i}>
-                                        <Row>
-                                        <Col>
-                                            <pre>
-                                                <h6>{menuItem.name}   X   {menuItem.orderItem.quantity}</h6>
-                                            </pre>
-                                        </Col>
-                                        <Col>
-                                        <pre>
-                                            <h6>{menuItem.price * menuItem.orderItem.quantity}</h6>
-                                        </pre>
-                                        </Col>
-                                        <Col>
-                                            <pre>
-                                                <Button onClick={() => this.toggleEditItem()}>Edit</Button>
-                                            </pre>
-                                        </Col>
-                                        </Row>
-                                    </Row>
-                                );
-                            })} */}
-                            {this.state.toggleEditItemOn ? <Row><h3>quantity</h3></Row> : null}
-                            <Row>
-                                <Col>
-                                    <h3>Order Total: ${order.totalPrice.toFixed(2)}</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3>Paid For? {this.state.isPaid}</h3>
-                                    {console.log('Order Paid?', order.isPaid)}
-                                </Col>
-                            </Row>
-                        </Container>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={(e) => this.payOrder(e)}>Pay For Order</Button>
-                        <Link to='/order/add'>
-                            <Button color='primary' onClick={() => this.addToOrder()}>Add To Order</Button>
-                        </Link>
-                    </ModalFooter>
-                </Modal>
-            </div>
+            <Modal contentClassName='orderDetailModal' isOpen={this.props.orderInfoOn}>
+                <Container>
+                    <Row className='rowSpacing'>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' onClick={this.props.toggleInfo} color='danger'>X</Button>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Order Id: {order.id}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Date Order Taken: {this.getOrderDate(order)}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Order Taken At: {this.getOrderTime(order)}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Order Taken By: {order.user.firstName} {order.user.lastName}</h3>
+                        </Col>
+                    </Row>
+                    <Row  className='rowSpacing'>
+                        <Col>
+                            <h3>Customer: {order.customer.firstName} {order.customer.lastName}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h6>Phone Number: {this.formatPhoneNumber(order)}</h6>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Order Detail:</h3>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <h6>Item Name</h6>
+                        </Col>
+                    </Row>
+                    {order.menuItems.map((menuItem) => <OrderDetailItem token={this.props.token} menuItem={menuItem} orderId={order.id} orderPrice={order.totalPrice} mapOrders={this.props.mapOrders} />)}
+                    {this.state.toggleEditItemOn ? <Row><h3>quantity</h3></Row> : null}
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Order Total: ${order.totalPrice.toFixed(2)}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col>
+                            <h3>Paid For? {this.state.isPaid}</h3>
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col className='text-left'>
+                            <Button id='orderDetailBtn' onClick={(e) => this.payOrder(e)}>Pay For Order</Button>
+                        </Col>
+                        <Col className='text-right'>
+                            <Link to='/order/add'>
+                                <Button id='orderDetailBtn' color='primary' onClick={() => this.addToOrder()}>Add To Order</Button>
+                            </Link>
+                        </Col>
+                    </Row>
+                </Container>
+            </Modal>
         );
     }
 }
-
