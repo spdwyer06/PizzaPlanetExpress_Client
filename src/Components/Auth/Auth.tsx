@@ -8,6 +8,12 @@ import './Auth.css';
 
 
 
+// const bg = {
+//     overlay: {
+//         background: '#3260a8'
+//     }
+// }
+
 type UserModel = {
     isManager: boolean,
     isAdmin: boolean
@@ -48,10 +54,10 @@ export default class Auth extends Component<Props, State> {
 
     render() {
         return (
-            <Modal id='authModal' isOpen={true}>
-                <Button id='authSignupBtn' onClick={() => this.toggleSignup()}>Create New User</Button>
+            <Modal contentClassName='authModal' isOpen={true}>
+                <Button id='authBtn' onClick={() => this.toggleSignup()}>Create New User</Button>
                 <br />
-                <Button id='authLoginBtn' onClick={() => this.toggleLogin()}>Employee Login</Button>
+                <Button id='authBtn' onClick={() => this.toggleLogin()}>Employee Login</Button>
                 {this.state.signupOpen == true ? <Signup toggleSignup={this.toggleSignup} signupOpen={this.state.signupOpen} /> : <></>}
                 {this.state.loginOpen == true ? <Login updateToken={this.props.updateToken} updateUser={this.props.updateUser} toggleLogin={this.toggleLogin} loginOpen={this.state.loginOpen} /> : <></>}
             </Modal>

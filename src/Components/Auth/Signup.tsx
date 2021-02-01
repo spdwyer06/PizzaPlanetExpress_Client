@@ -82,10 +82,10 @@ export default class Signup extends Component<Props, State> {
 
     render() {
         return (
-            <Modal isOpen={this.props.signupOpen}>
+            <Modal contentClassName='signupModal' isOpen={this.props.signupOpen}>
                 <Form onSubmit={e => this.createUser(e)}>
                     <Button color='danger' id='cancelBtn' onClick={() => this.props.toggleSignup()}>X</Button>
-                    <FormGroup>
+                    <FormGroup id='signupForm'>
                         <Label for='firstName'>First Name:</Label>  
                         <Input name='firstName' id='firstNameInput' onChange={async e => await this.setState({firstName: e.target.value})} required />
                     </FormGroup>
@@ -97,7 +97,7 @@ export default class Signup extends Component<Props, State> {
                         <Label for='password'>Password:</Label>  
                         <Input name='password' id='passwordInput' onChange={e => this.setState({password: parseInt(e.target.value)})} required />
                     </FormGroup>
-                    <Button type='submit'>Create User</Button>
+                    <Button type='submit' id='createUserBtn'>Create User</Button>
                 </Form>
             </Modal>
         );

@@ -34,15 +34,16 @@ export default class Login extends Component<Props, State> {
         }
     }
     
-    setPass(e: React.MouseEvent<HTMLElement>){
+    async setPass(e: React.MouseEvent<HTMLElement>){
         const value = (e.target as HTMLButtonElement).value;
-        console.log('Button Value:', value);
-        let passBox = document.getElementById('password');
-        (passBox as HTMLInputElement).innerText += value;
+        // console.log('Button Value:', value);
 
-        this.setState({
+        await this.setState({
             password: this.state.password + value
         }, () => console.log('Password State:', this.state.password));
+
+        let passBox = document.getElementById('password');
+        (passBox as HTMLInputElement).innerText += value;
     } 
     
     removeLastNum(){
@@ -90,69 +91,62 @@ export default class Login extends Component<Props, State> {
 
     render(){
         return(
-            <Modal isOpen={true}>
-                <ModalHeader>
-                    <Container>
-                        <Row>
-                            <Col sm='10'>
-                                <h4>Enter Your Password</h4>
-                            </Col>
-                            <Col sm='2'>
-                                <Button onClick={this.props.toggleLogin} color='danger'>X</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalHeader>
-                <Container className='loginContainer'>
+            <Modal contentClassName='loginModal' isOpen={true}>
+                <Container>
                     <Row>
-                        <Col xs='3'></Col>
-                        <Col className='passInput' xs='auto'>
-                            <Label id='password'></Label>
+                        <Col className='text-right'>
+                            <Button id='loginCancelBtn' onClick={this.props.toggleLogin} color='danger'>X</Button>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs='3'></Col>
-                        <Col className='col1' xs='auto'>
+                        <Col xs='auto'>
+                            {this.state.password != '' ? <Label id='password'></Label> : null}
+                        </Col>
+                    </Row>
+                    <Row className='rowSpacing'>
+                        <Col xs='3'></Col>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e: React.MouseEvent<HTMLElement>) => this.setPass(e)} value='1'>1</Button> : <></>}
                         </Col>
-                        <Col className='col2' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='2'>2</Button> : <></>}
                         </Col>
-                        <Col className='col3 numBtn' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='3'>3</Button> : <></>}
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='rowSpacing'>
                         <Col xs='3'></Col>
-                        <Col className='col1' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='4'>4</Button> : <></>}
                         </Col>
-                        <Col className='col2' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='5'>5</Button> : <></>}
                         </Col>
-                        <Col className='col3' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='6'>6</Button> : <></>}
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='rowSpacing'>
                         <Col xs='3'></Col>
-                        <Col className='col1' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='7'>7</Button> : <></>}
                         </Col>
-                        <Col className='col2' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='8'>8</Button> : <></>}
                         </Col>
-                        <Col className='col3' xs='auto'>
+                        <Col xs='auto'>
                             {this.state.password.length < 4 ? <Button id='loginNumBtn' onClick={(e) => this.setPass(e)} value='9'>9</Button> : <></>}
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='rowSpacing'>
                         <Col xs='3'></Col>
-                        <Col className='col1' xs='auto'>
+                        <Col xs='auto'>
                             <Button id='loginNumBtn' onClick={() => this.removeLastNum()}><img id='backspace' src={Backspace} /></Button>
                         </Col>
-                        <Col className='col2' xs='auto'>
-                            {this.state.password.length == 4 ? <Button type='submit' className='loginBtn' onClick={() => this.login()}>Login</Button> : <></>}
+                        <Col xs='auto'>
+                            {this.state.password.length == 4 ? <Button type='submit' id='loginBtn' onClick={() => this.login()}>Login</Button> : <></>}
                         </Col>
                     </Row>
                 </Container>

@@ -87,7 +87,8 @@ class App extends Component<{}, State> {
 
   render(){
     return (
-      <div className="App">
+      <div id='mainApp' className="App">
+        <h1>Stuff</h1>
         {console.log('App render() Token State:', this.state.sessionToken)}
         {console.log('App render() User State:', this.state.user)}
         {this.state.sessionToken === '' ? <Auth updateUser={this.updateUser} updateToken={this.updateToken} /> : <Home token={this.state.sessionToken} user={this.state.user} logout={this.logOut} />}
