@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect, Switch } from 'react-router-dom';
 import {Button, Col} from 'reactstrap';
 
 import API_URL from '../../env';
@@ -87,8 +88,6 @@ export default class MenuItem extends Component<Props, State> {
             };
 
             await fetch(url, options);
-            console.log('addItemToOrder() After Fetch');
-            // <OrderList />
         }
         catch(err){
             console.log('Error:', err.message);

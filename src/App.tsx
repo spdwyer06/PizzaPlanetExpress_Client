@@ -6,7 +6,7 @@ import Home from './Components/Home/Home';
 import UserModel from './Components/Models/UserModel';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './app.css';
 
 
 
