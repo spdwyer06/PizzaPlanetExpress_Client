@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, M
 
 import API_URL from '../../env';
 
+import './customer.css';
 
 
 
@@ -80,7 +81,40 @@ export default class CustomerCreate extends Component<Props, State> {
 
     render() {
         return (
-            <Modal isOpen={this.props.customerCreateOn}>
+            <Modal contentClassName='custCreateModal' isOpen={this.props.customerCreateOn}>
+                <Container>
+                    <Row className='rowSpacing'>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' onClick={this.props.toggleCustomerCreate} color='danger'>X</Button>
+                        </Col>
+                    </Row>
+                    <Form onSubmit={(e) => this.submitForm(e)}>
+                        <FormGroup>
+                            <Label for='customerFirstName'>Customer First Name:</Label>
+                            <Input name='customerFirstName' className='rowSpacing' required onChange={e => this.setState({firstName: e.target.value})} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for='customerLastName'>Customer Last Name:</Label>
+                            <Input name='customerLastName' className='rowSpacing' required onChange={e => this.setState({lastName: e.target.value})} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for='customerPhoneNumber'>Customer Phone Number:</Label>
+                            <Input name='customerPhoneNumber' className='rowSpacing' required onChange={e => this.setState({phoneNumber: parseInt(e.target.value)})} />
+                        </FormGroup>
+                        <Row className='rowSpacing'>
+                            <Col className='text-center'>
+                                <Button id='createCustBtn' type='submit'>Done</Button>
+                            </Col>
+                        </Row>
+                </Form>
+                </Container>
+            </Modal>
+        );
+    }
+}
+
+/*
+ <Modal isOpen={this.props.customerCreateOn}>
                 <ModalHeader>
                     <Container>
                         <Row>
@@ -113,7 +147,4 @@ export default class CustomerCreate extends Component<Props, State> {
                     </ModalFooter>
                 </Form>
             </Modal>
-        );
-    }
-}
-
+*/

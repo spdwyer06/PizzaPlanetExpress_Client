@@ -5,6 +5,8 @@ import API_URL from '../../env';
 
 import CustomerModel from '../Models/CustomerModel';
 
+import './customer.css';
+
 
 
 type Props = {
@@ -100,44 +102,40 @@ export default class CustomerEdit extends Component<Props, State> {
 
     render() {
         return (
-            <Modal isOpen={this.props.editCustomerOn}>
-                <ModalHeader>
-                    <Container>
-                        <Row>
-                            <Col sm='10'>
-                                <h3>Customer Edit</h3>
-                            </Col>
-                            <Col sm='2'>
-                                <Button onClick={this.props.toggleCustomerEdit} color='danger'>X</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalHeader>
-                <Form onSubmit={(e) => this.submitForm(e)}>
-                <ModalBody>
+            <Modal contentClassName='customerEditModal' isOpen={this.props.editCustomerOn}>
+                <Container>
+                    <Row className='rowSpacing'>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' onClick={this.props.toggleCustomerEdit} color='danger'>X</Button>
+                        </Col>
+                    </Row>
+                    <Form onSubmit={(e) => this.submitForm(e)}>
                         <FormGroup>
                             <Label for='itemId'>Customer Id: {this.props.customer.id}</Label>
                         </FormGroup>
                         <FormGroup>
                             <Label for='customerFirstName'>Customer First Name:</Label>
-                            <Input name='customerFirstName' id='customerFirstNameInput' required placeholder={this.props.customer.firstName} onChange={e => this.setState({updatedFirstName: e.target.value})} />
+                            <Input name='customerFirstName' className='rowSpacing' required placeholder={this.props.customer.firstName} onChange={e => this.setState({updatedFirstName: e.target.value})} />
                         </FormGroup>
                         <FormGroup>
                             <Label for='customerLastName'>Customer Last Name:</Label>
-                            <Input name='customerLastName' id='customerLastNameInput' required placeholder={this.props.customer.lastName} onChange={e => this.setState({updatedLastName: e.target.value})} />
+                            <Input name='customerLastName' className='rowSpacing' required placeholder={this.props.customer.lastName} onChange={e => this.setState({updatedLastName: e.target.value})} />
                         </FormGroup>
                         <FormGroup>
                             <Label for='customerPhoneNumber'>Customer Phone Number:</Label>
-                            <Input name='customerPhoneNumber' id='customerPhoneNumberInput' required placeholder={(this.props.customer.phoneNumber).toString()} onChange={e => this.setState({updatedPhoneNumber: parseInt(e.target.value)})} />
+                            <Input name='customerPhoneNumber' className='rowSpacing' required placeholder={(this.props.customer.phoneNumber).toString()} onChange={e => this.setState({updatedPhoneNumber: parseInt(e.target.value)})} />
                         </FormGroup>
-                </ModalBody>
-                <ModalFooter>
-                    <Button type='submit'>Done</Button>
-                    {localStorage.getItem('userRole') == 'manager' || localStorage.getItem('userRole') == 'admin' ? <Button color='danger' onClick={(e) => this.removeCustomer(e)}>Remove Customer From System</Button> : null}
-                </ModalFooter>
-                </Form>
+                        <Row className='rowSpacing'>
+                            <Col className='text-left'>
+                                <Button id='editCustBtn' type='submit'>Done</Button>
+                            </Col>
+                            <Col className='text-right'>
+                                {localStorage.getItem('userRole') == 'manager' || localStorage.getItem('userRole') == 'admin' ? <Button id='deleteCustBtn' color='danger' onClick={(e) => this.removeCustomer(e)}>Remove Customer From System</Button> : null}
+                            </Col>
+                        </Row>
+                    </Form>
+                </Container>
             </Modal>
         );
     }
 }
-

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {Button} from 'reactstrap';
+import {Button, Container, Row, Col} from 'reactstrap';
 
 import API_URL from '../../env';
 import Customer from '../Customer/Customer';
 import CustomerCreate from '../Customer/CustomerCreate';
 
 import CustomerModel from '../Models/CustomerModel';
+
+import './customer.css';
 
 
 
@@ -67,13 +69,17 @@ export default class CustomerList extends Component<Props, State> {
 
     render() {
         return (
-            <div>
-                <h1>Customer List</h1>
-                <Button onClick={() => this.toggleCustomerCreate()}>Add New Customer</Button>
-                {this.state.customers.map((customer, i) => <Customer token={this.props.token} customer={customer} capitalizeName={this.capitalizeName} updateCustomer={this.props.updateCustomer} mapCustomers={this.mapCustomers} key={i} />)}
+            <Container>
+                <Row>
+                    <Col className='text-center'>
+                        <Button id='newCustBtn' onClick={() => this.toggleCustomerCreate()}>Add New Customer</Button>
+                    </Col>
+                </Row>
+                <Row>
+                    {this.state.customers.map((customer, i) => <Customer token={this.props.token} customer={customer} capitalizeName={this.capitalizeName} updateCustomer={this.props.updateCustomer} mapCustomers={this.mapCustomers} key={i} />)}
+                </Row>
                 {this.state.customerCreateOn ? <CustomerCreate token={this.props.token} customerCreateOn={this.state.customerCreateOn} toggleCustomerCreate={this.toggleCustomerCreate} mapCustomers={this.mapCustomers} /> : null}
-            </div>
+            </Container>
         );
     }
 }
-
