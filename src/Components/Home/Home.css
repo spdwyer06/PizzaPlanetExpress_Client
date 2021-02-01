@@ -6,9 +6,9 @@
 #btn{
     height: 110px;
     width:110px;
-    border: 13px solid #6f5570;
-    background-color: #dd4aed;
-    color: white;
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
     font-size: 13px;
     text-align: center;
 }
@@ -26,7 +26,8 @@
 } */
 
 .qwer{
-    background-color: chartreuse;
+    background-color: white;
+    opacity: 0.5;
 }
 
 

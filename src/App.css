@@ -1,8 +1,7 @@
 .App {
   text-align: center;
   background-image: url('./mainSpaceBg.jpg');
-  /* background-image: url('./spaceBg4.png'); */
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 100%;
 }
