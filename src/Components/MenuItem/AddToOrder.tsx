@@ -24,7 +24,39 @@ export default class AddToOrder extends Component<Props> {
     
     render() {
         return (
-            <Modal isOpen={this.props.addToOrderOn}>
+            <Modal contentClassName='addToOrderModal' isOpen={this.props.addToOrderOn}>
+                <Container>
+                    <Row className='rowSpacing'>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' color='danger' onClick={this.props.toggleAddToOrder}>X</Button>
+                        </Col>
+                    </Row>
+                    <Form onSubmit={this.props.addItemToOrder}>
+                        <Row className='rowSpacing'>
+                            <Col sm='3'>
+                                {this.props.quantity > 0 ? <Button id='itemQuantityBtn' onClick={() => this.props.updateQuantity(-1)}>-</Button> : null}
+                            </Col>
+                            <Col sm='6' className='text-center'>
+                                <h1>{this.props.quantity}</h1>
+                            </Col>
+                            <Col sm='3'>
+                                <Button id='itemQuantityBtn' onClick={() => this.props.updateQuantity(1)}>+</Button>
+                            </Col>
+                        </Row>
+                        <Row className='rowSpacing'>
+                            <Col className='text-center'>
+                                <Button id='addItemToOrderBtn' type='submit'>Done</Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Container>
+            </Modal>
+        );
+    }
+}
+
+/*
+<Modal isOpen={this.props.addToOrderOn}>
                 <ModalHeader>
                     <Container>
                         <Row>
@@ -57,13 +89,8 @@ export default class AddToOrder extends Component<Props> {
                         <Button type='submit'>Done</Button>
                     </ModalFooter>
                 </Form>
-                
             </Modal>
-        );
-    }
-}
-
-
+*/
 
 
 

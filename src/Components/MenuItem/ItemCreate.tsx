@@ -4,6 +4,8 @@ import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, Container, R
 import API_URL from '../../env';
 import UserModel from '../Models/UserModel';
 
+import './menuItem.css';
+
 
 
 type Props = {
@@ -71,32 +73,30 @@ export default class ItemCreate extends Component<Props, State> {
 
     render() {
         return (
-            <Modal isOpen={this.props.createOn}>
-                <ModalHeader>
-                    <Container>
+            <Modal contentClassName='itemCreateModal' isOpen={this.props.createOn}>
+                <Container>
+                    <Row>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' onClick={this.props.toggleCreate} color='danger'>X</Button>
+                        </Col>
+                    </Row>
+                    <Form onSubmit={(e) => this.submitForm(e)}>
+                        <FormGroup>
+                            <Label for='itemName'>Menu Item Name:</Label>
+                            <Input name='itemName' id='itemNameInput' onChange={e => this.setState({name: e.target.value})}  required />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for='itemPrice'>Menu Item Price:</Label>
+                            <Input name='item{rice' id='itemPriceInput' onChange={e => this.setState({price: parseInt(e.target.value)})}  required />
+                        </FormGroup>
                         <Row>
-                            <Col sm='10'>
-                                <h3>Menu Item Create</h3>
-                            </Col>
-                            <Col sm='2'>
-                                <Button onClick={this.props.toggleCreate} color='danger'>X</Button>
+                            <Col className='text-center'>
+                                <Button id='createItemBtn' type='submit'>Create Menu Item</Button>
                             </Col>
                         </Row>
-                    </Container>
-                </ModalHeader>
-                <Form onSubmit={(e) => this.submitForm(e)}>
-                    <FormGroup>
-                        <Label for='itemName'>Menu Item Name:</Label>
-                        <Input name='itemName' id='itemNameInput' onChange={e => this.setState({name: e.target.value})}  required />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for='itemPrice'>Menu Item Price:</Label>
-                        <Input name='item{rice' id='itemPriceInput' onChange={e => this.setState({price: parseInt(e.target.value)})}  required />
-                    </FormGroup>
-                    <Button type='submit'>Create Menu Item</Button>
-                </Form>
+                    </Form>
+                </Container>
             </Modal>
         );
     }
 }
-

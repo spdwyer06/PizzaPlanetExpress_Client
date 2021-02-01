@@ -1,0 +1,105 @@
+/*****************************/
+/* Menu Item List Compoonent */
+/*****************************/
+
+#addNewItemBtn{
+    margin-left: auto;
+    margin-right: auto;
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+
+/**************************/
+/*  Menu Item Compoonent  */
+/**************************/
+
+#editItemBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.menuItem{
+    background-color: whitesmoke;
+    opacity: 0.7;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10%;
+}
+
+
+/**************************/
+/*  Item Edit Compoonent  */
+/**************************/
+
+#cancelBtn{
+    height: 40px;
+    width: 40px;
+    margin-bottom: 22px;
+}
+
+#editSubmitBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+#editRemoveBtn{
+    width: 250px;
+    border: 13px solid #04614b;
+    background-color: red;
+    color: #FFFDD0;
+}
+
+.itemEditModal{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+    font-size: 30px;
+}
+
+.rowSpacing{
+    margin-bottom: 22px;
+}
+
+
+/****************************/
+/*  Item Create Compoonent  */
+/****************************/
+
+#createItemBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.itemCreateModal{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+    font-size: 30px;
+}
+
+/*****************************/
+/*  Add To Order Compoonent  */
+/*****************************/
+
+#itemQuantityBtn{
+    height: 65px;
+    width: 65px;
+    border: 10px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+    font-size: 20px;
+}
+
+#addItemToOrderBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.addToOrderModal{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+}

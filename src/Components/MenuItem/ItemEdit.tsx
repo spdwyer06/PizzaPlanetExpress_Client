@@ -3,6 +3,8 @@ import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, M
 
 import API_URL from '../../env';
 
+import './menuItem.css';
+
 
 
 type Props = {
@@ -93,40 +95,36 @@ export default class ItemEdit extends Component<Props, State> {
 
     render() {
         return (
-            <Modal isOpen={this.props.editOn}>
-                <ModalHeader>
-                    <Container>
-                        <Row>
-                            <Col sm='10'>
-                                <h3>Menu Item Edit</h3>
-                            </Col>
-                            <Col sm='2'>
-                                <Button onClick={this.props.toggleEdit} color='danger'>X</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalHeader>
-                <Form onSubmit={(e) => this.submitForm(e)}>
-                    <ModalBody>
+            <Modal contentClassName='itemEditModal' isOpen={this.props.editOn}>
+                <Container>
+                    <Row className='rowSpacing'>
+                        <Col className='text-right'>
+                            <Button id='cancelBtn' onClick={this.props.toggleEdit} color='danger'>X</Button>
+                        </Col>
+                    </Row>
+                    <Form onSubmit={(e) => this.submitForm(e)}>
                         <FormGroup>
                             <Label for='itemId'>Item Id: {this.props.item.id}</Label>
                         </FormGroup>
                         <FormGroup>
                             <Label for='itemName'>Menu Item Name:</Label>
-                            <Input name='itemName' id='itemNameInput' required placeholder={this.props.item.name} onChange={e => this.setState({updatedName: e.target.value})} />
+                            <Input name='itemName' className='rowSpacing' required placeholder={this.props.item.name} onChange={e => this.setState({updatedName: e.target.value})} />
                         </FormGroup>
                         <FormGroup>
                             <Label for='itemPrice'>Menu Item Price:</Label>
-                            <Input name='itemPrice' id='itemPriceInput' required placeholder={(this.props.item.price).toString()} onChange={e => this.setState({updatedPrice: parseInt(e.target.value)})} />
+                            <Input name='itemPrice' className='rowSpacing' required placeholder={(this.props.item.price).toString()} onChange={e => this.setState({updatedPrice: parseInt(e.target.value)})} />
                         </FormGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button type='submit'>Done</Button>
-                        <Button color='danger' onClick={(e) => this.removeItem(e)}>Remove Item From Menu</Button>
-                    </ModalFooter>
-                </Form>
+                        <Row className='rowSpacing'>
+                            <Col>
+                                <Button id='editSubmitBtn' type='submit'>Done</Button>
+                            </Col>
+                            <Col>
+                                <Button id='editRemoveBtn' color='danger' onClick={(e) => this.removeItem(e)}>Remove Item From Menu</Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Container>
             </Modal>
         );
     }
 }
-

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Route, BrowserRouter as Router, Switch, Link} from 'react-router-dom';
-import {Button} from 'reactstrap';
+import {Button, Col} from 'reactstrap';
 
 import API_URL from '../../env';
 import MenuItemEdit from './ItemEdit';
@@ -9,7 +8,7 @@ import OrderList from '../Order/OrderList';
 
 import MenuItemModel from '../Models/MenuItemModel';
 
-import './MenuItem.css';
+import './menuItem.css';
 
 
 
@@ -100,27 +99,18 @@ export default class MenuItem extends Component<Props, State> {
         const {item} = this.props;
 
         return (
-                <div>
-                    {/* <h3>{this.props.item.name}</h3> */}
+                <Col className='menuItem' sm='3'>
                     <h3>{this.props.capName(item.name)}</h3>
-                    {/* .toFixed(2) => specifiy 2 decimal places */}
                     <h3>${this.props.item.price.toFixed(2)}</h3>
                     {/* {this.props.user.isAdmin ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>} */}
-                    {localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>}
+                    {localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button id='editItemBtn' onClick={this.toggleEdit}>Edit Item</Button> : <></>}
                     {/* {this.props.orderId != 0 ? <Button onClick={() => this.props.updateOrderItems(item)}>Add To Order</Button> : null} */}
                     {/* {this.props.orderId != 0 ? <Button onClick={() => this.addItemToOrder(item)}>Add To Order</Button> : null} */}
-                    {this.props.orderId != 0 ? <Button onClick={this.toggleAddToOrder}>Add To Order</Button> : null}
+                    {this.props.orderId != 0 ? <Button id='editItemBtn' onClick={this.toggleAddToOrder}>Add To Order</Button> : null}
                     {console.log('Menu Item Token:', this.props.token)}
                     {this.state.editOn ? <MenuItemEdit refreshMenu={this.props.refreshMenu} token={this.props.token} toggleEdit={this.toggleEdit} item={this.props.item} editOn={this.state.editOn} /> : null}
                     {this.state.addToOrderOn ? <AddToOrder addToOrderOn={this.state.addToOrderOn} toggleAddToOrder={this.toggleAddToOrder} updateSpecialInstructions={this.updateSpecialInstructions} updateQuantity={this.updateQuantity} addItemToOrder={this.addItemToOrder} quantity={this.state.quantity} /> : null}
-                </div>
-
-            //     <Switch>
-            //         <Route path='/menuItem/itemId' exact>
-            //             <MenuItemEdit item={this.props.item} />
-            //         </Route>
-            //     </Switch>
-            // </Router>
+                </Col>
         );
     }
 }

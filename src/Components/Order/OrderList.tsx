@@ -96,7 +96,6 @@ export default class OrderList extends Component<Props, State> {
 
                 <Switch>
                     <Route exact path='/order/add'>
-                        <h2>Stuff n things</h2>
                         <MenuItemList token={this.props.token} user={this.props.user} orderId={this.state.orderId} />
                     </Route> 
                 </Switch>

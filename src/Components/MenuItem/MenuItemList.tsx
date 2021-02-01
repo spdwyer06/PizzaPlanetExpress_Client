@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'reactstrap';
+import {Button, Container, Row, Col} from 'reactstrap';
 
 import API_URL from '../../env';
 import MenuItem from './MenuItem';
@@ -7,7 +7,7 @@ import MenuItemCreate from './ItemCreate';
 
 import UserModel from '../Models/UserModel';
 
-import './MenuItem.css';
+import './menuItem.css';
 
 
 
@@ -79,12 +79,26 @@ export default class MenuItemList extends Component<Props, State> {
     render() {
 
         return (
-            <div>
-                <h1>All Menu Items</h1>
-                {localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
-                {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} orderId={this.props.orderId} capName={this.capitalizeName} key={i} refreshMenu={this.mapItems} />)}
+            <Container>
+                <Row>
+                    {localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button id='addNewItemBtn' onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
+                </Row>
+                <Row>
+                    {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} orderId={this.props.orderId} capName={this.capitalizeName} key={i} refreshMenu={this.mapItems} />)}
+                </Row>
                 {this.state.createOn ? <MenuItemCreate user={this.props.user} token={this.props.token} createOn={this.state.createOn} toggleCreate={this.toggleCreate} capitalizeName={this.capitalizeName} /> : <></>}
-            </div>
+            </Container>
         );
     }
 }
+
+{/* <div>
+<h1>All Menu Items</h1>
+{localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button onClick={this.toggleCreate}>Add New Menu Item</Button> : <></>}
+<Container>
+    <Row>
+        {this.state.menuItems.map((menuItem, i) => <MenuItem user={this.props.user} token={this.props.token} item={menuItem} orderId={this.props.orderId} capName={this.capitalizeName} key={i} refreshMenu={this.mapItems} />)}
+    </Row>
+</Container>
+{this.state.createOn ? <MenuItemCreate user={this.props.user} token={this.props.token} createOn={this.state.createOn} toggleCreate={this.toggleCreate} capitalizeName={this.capitalizeName} /> : <></>}
+</div> */}
