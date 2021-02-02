@@ -10,6 +10,14 @@
     color: #FFFDD0;
 }
 
+.noItems{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+    font-size: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30vh;
+}
 
 /**************************/
 /*  Menu Item Compoonent  */

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect, Switch } from 'react-router-dom';
 import {Button, Col} from 'reactstrap';
 
 import API_URL from '../../env';
@@ -62,8 +61,6 @@ export default class MenuItem extends Component<Props, State> {
 
     updateSpecialInstructions = async(instructions: string) => await this.setState({specialInstructions: instructions});
 
-    // updateQuantity = async(quantity: number) => await this.setState({quantity: quantity});
-
     async updateQuantity(quantity: number){
         const currentQuantity = this.state.quantity;
 
@@ -88,6 +85,7 @@ export default class MenuItem extends Component<Props, State> {
             };
 
             await fetch(url, options);
+            console.log('addItemToOrder() After Fetch');
         }
         catch(err){
             console.log('Error:', err.message);
@@ -101,10 +99,7 @@ export default class MenuItem extends Component<Props, State> {
                 <Col className='menuItem' sm='3'>
                     <h3>{this.props.capName(item.name)}</h3>
                     <h3>${this.props.item.price.toFixed(2)}</h3>
-                    {/* {this.props.user.isAdmin ? <Button onClick={this.toggleEdit}>Edit Item</Button> : <></>} */}
                     {localStorage.getItem('userRole') == 'admin' && window.location.href == 'http://localhost:3000/menuItem/all' ? <Button id='editItemBtn' onClick={this.toggleEdit}>Edit Item</Button> : <></>}
-                    {/* {this.props.orderId != 0 ? <Button onClick={() => this.props.updateOrderItems(item)}>Add To Order</Button> : null} */}
-                    {/* {this.props.orderId != 0 ? <Button onClick={() => this.addItemToOrder(item)}>Add To Order</Button> : null} */}
                     {this.props.orderId != 0 ? <Button id='editItemBtn' onClick={this.toggleAddToOrder}>Add To Order</Button> : null}
                     {console.log('Menu Item Token:', this.props.token)}
                     {this.state.editOn ? <MenuItemEdit refreshMenu={this.props.refreshMenu} token={this.props.token} toggleEdit={this.toggleEdit} item={this.props.item} editOn={this.state.editOn} /> : null}

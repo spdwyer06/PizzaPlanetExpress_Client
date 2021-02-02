@@ -1,0 +1,87 @@
+/******************************/
+/*  Customer List Compoonent  */
+/******************************/
+
+#newCustBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.noCustomers{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+    font-size: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30vh;
+}
+
+
+/*************************/
+/*  Customer Compoonent  */
+/*************************/
+
+#custBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.customer{
+    background-color: whitesmoke;
+    opacity: 0.7;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10%;
+}
+
+
+/******************************/
+/*  Customer Edit Compoonent  */
+/******************************/
+
+#cancelBtn{
+    height: 40px;
+    width: 40px;
+    margin-bottom: 22px;
+}
+
+#editCustBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+#deleteCustBtn{
+    width: 300px;
+    border: 13px solid #04614b;
+    color: #FFFDD0;
+}
+
+.customerEditModal{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+    font-size: 25px;
+}
+
+.rowSpacing{
+    margin-bottom: 22px;
+}
+
+
+/********************************/
+/*  Customer Create Compoonent  */
+/********************************/
+
+#createCustBtn{
+    border: 13px solid #04614b;
+    background-color: #27cfa8;
+    color: #FFFDD0;
+}
+
+.custCreateModal{
+    background-image: url('../Auth/modalSpaceBg.JPG');
+    color: #FFFDD0;
+    font-size: 25px;
+}

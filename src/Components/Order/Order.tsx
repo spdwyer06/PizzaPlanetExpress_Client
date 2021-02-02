@@ -67,9 +67,11 @@ export default class Order extends Component<Props, State> {
     render() {
         // Prop Destructuring
         const {order} = this.props;
-
+        const customer = order.customer;
         return (
+
             <Col className='order' sm='3'>
+                {console.log('alfj', this.props.order.customer.firstName)}
                 <h3>Customer Name: {order.customer.lastName}, {order.customer.firstName}</h3>
                 <h3>Order Price: ${order.totalPrice.toFixed(2)}</h3>
                 <Button id='viewDetailBtn' onClick={this.toggleOrderInfo}>View</Button>

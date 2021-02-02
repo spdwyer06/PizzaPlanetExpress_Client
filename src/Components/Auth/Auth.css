@@ -3,13 +3,16 @@
 /**************************/
 
 .authModal{
-    background-color: transparent !important;
+    background-color: transparent;
+    height: 100vh;
+    margin-top: 35vh;
 }
 
 #authBtn{
     width: 200px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 30px;
     border: 13px solid #04614b;
     background-color: #27cfa8;
     color: #FFFDD0;

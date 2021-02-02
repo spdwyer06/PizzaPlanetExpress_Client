@@ -54,14 +54,23 @@ export default class Auth extends Component<Props, State> {
 
     render() {
         return (
-            <Modal contentClassName='authModal' isOpen={true}>
+            <div className='authModal'>
+                <Button id='authBtn' onClick={() => this.toggleSignup()}>Create New User</Button>
+                <br />
+                <Button id='authBtn' onClick={() => this.toggleLogin()}>Employee Login</Button>
+                {this.state.signupOpen == true ? <Signup toggleSignup={this.toggleSignup} signupOpen={this.state.signupOpen} /> : <></>}
+                {this.state.loginOpen == true ? <Login updateToken={this.props.updateToken} updateUser={this.props.updateUser} toggleLogin={this.toggleLogin} loginOpen={this.state.loginOpen} /> : <></>}
+            </div>
+        );
+    }
+}
+
+/*
+      <Modal contentClassName='authModal' isOpen={true}>
                 <Button id='authBtn' onClick={() => this.toggleSignup()}>Create New User</Button>
                 <br />
                 <Button id='authBtn' onClick={() => this.toggleLogin()}>Employee Login</Button>
                 {this.state.signupOpen == true ? <Signup toggleSignup={this.toggleSignup} signupOpen={this.state.signupOpen} /> : <></>}
                 {this.state.loginOpen == true ? <Login updateToken={this.props.updateToken} updateUser={this.props.updateUser} toggleLogin={this.toggleLogin} loginOpen={this.state.loginOpen} /> : <></>}
             </Modal>
-        );
-    }
-}
-
+*/

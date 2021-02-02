@@ -6,7 +6,7 @@ import Home from './Components/Home/Home';
 import UserModel from './Components/Models/UserModel';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.css';
+import './App.css';
 
 
 
@@ -87,8 +87,8 @@ class App extends Component<{}, State> {
 
   render(){
     return (
-      <div id='mainApp' className="App">
-        <br />
+      <div className="App">
+        <br id='mainApp' />
         {console.log('App render() Token State:', this.state.sessionToken)}
         {console.log('App render() User State:', this.state.user)}
         {this.state.sessionToken === '' ? <Auth updateUser={this.updateUser} updateToken={this.updateToken} /> : <Home token={this.state.sessionToken} user={this.state.user} logout={this.logOut} />}
