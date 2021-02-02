@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap';
+import { Button, Modal, Container, Row, Col } from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 import API_URL from '../../env';
-import OderDetailItem from './OrderDetailItem';
 
 import OrderModel from '../Models/OrderModel';
 import UserModel from '../Models/UserModel';
 import MenuItemModel from '../Models/MenuItemModel';
-import OrderDetailItems from './OrderDetailItem';
 import OrderDetailItem from './OrderDetailItem';
 
 import './order.css';
@@ -93,7 +91,6 @@ export default class OrderDetail extends Component<Props, State> {
             const options = {
                 method: 'PUT',
                 body: JSON.stringify({
-                    // isPaid: !this.props.order.isPaid
                     isPaid: true
                 }),
                 headers: new Headers({

@@ -9,6 +9,8 @@ import UserModel from '../Models/UserModel';
 
 import './order.css';
 
+
+
 type Props = {
     order: OrderModel,
     user: UserModel,
@@ -27,12 +29,10 @@ export default class Order extends Component<Props, State> {
         super(props)
     
         this.state = {
-            orderInfoOn: false,
-            // orderEditOn: false
+            orderInfoOn: false
         }
 
         this.toggleOrderInfo = this.toggleOrderInfo.bind(this);
-        // this.toggleOrderEdit = this.toggleOrderEdit.bind(this);
     }
     
     toggleOrderInfo = () => this.setState({orderInfoOn: !this.state.orderInfoOn});
@@ -81,4 +81,3 @@ export default class Order extends Component<Props, State> {
         );
     }
 }
-

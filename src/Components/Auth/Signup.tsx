@@ -70,7 +70,6 @@ export default class Signup extends Component<Props, State> {
                     const r = await res.json();
                     console.log('Error:', r.Error.errors[0].message);
                     alert(`Error: ${r.Error.errors[0].message}`);
-                    // alert('Password already being used, select a different 4-digit password.');
                 }
             }
             catch(err){
@@ -103,5 +102,3 @@ export default class Signup extends Component<Props, State> {
         );
     }
 }
-
-

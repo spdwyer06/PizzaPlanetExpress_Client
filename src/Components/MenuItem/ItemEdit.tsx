@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, ModalFooter, Container, Row, Col } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Modal, Container, Row, Col } from "reactstrap";
 
 import API_URL from '../../env';
 
@@ -36,7 +36,6 @@ export default class ItemEdit extends Component<Props, State> {
     }
     
     async submitForm(e: React.FormEvent){
-        console.log('Form Submit');
         e.preventDefault();
 
         const stringValues = /^[A-Za-z]+$/

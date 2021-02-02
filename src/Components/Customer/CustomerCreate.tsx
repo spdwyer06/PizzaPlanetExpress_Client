@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, ModalFooter, Container, Row, Col } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Modal, Container, Row, Col } from "reactstrap";
 
 import API_URL from '../../env';
 
@@ -112,39 +112,3 @@ export default class CustomerCreate extends Component<Props, State> {
         );
     }
 }
-
-/*
- <Modal isOpen={this.props.customerCreateOn}>
-                <ModalHeader>
-                    <Container>
-                        <Row>
-                            <Col sm='10'>
-                                <h3>Customer Create</h3>
-                            </Col>
-                            <Col sm='2'>
-                                <Button onClick={this.props.toggleCustomerCreate} color='danger'>X</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalHeader>
-                <Form onSubmit={(e) => this.submitForm(e)}>
-                    <ModalBody>
-                        <FormGroup>
-                            <Label for='customerFirstName'>Customer First Name:</Label>
-                            <Input name='customerFirstName' id='customerFirstNameInput' required onChange={e => this.setState({firstName: e.target.value})} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for='customerLastName'>Customer Last Name:</Label>
-                            <Input name='customerLastName' id='customerLastNameInput' required onChange={e => this.setState({lastName: e.target.value})} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for='customerPhoneNumber'>Customer Phone Number:</Label>
-                            <Input name='customerPhoneNumber' id='customerPhoneNumberInput' required onChange={e => this.setState({phoneNumber: parseInt(e.target.value)})} />
-                        </FormGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button type='submit'>Done</Button>
-                    </ModalFooter>
-                </Form>
-            </Modal>
-*/

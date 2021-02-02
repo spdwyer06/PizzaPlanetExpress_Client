@@ -2,7 +2,6 @@
 /*   Navbar Compoonent     */
 /**************************/
 
-
 #btn{
     height: 110px;
     width:110px;
@@ -12,22 +11,3 @@
     font-size: 13px;
     text-align: center;
 }
-
-
-/**************************/
-/*   Home Compoonent     */
-/**************************/
-
-
-/* .wasd{
-    background-image: url('../../spaceBg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
-
-/* .qwer{
-    background-color: white;
-    opacity: 0.5;
-} */
-
-

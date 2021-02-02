@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Modal} from 'reactstrap';
+import {Button} from 'reactstrap';
 
 import Login from './Login';
 import Signup from './Signup';
@@ -7,12 +7,6 @@ import Signup from './Signup';
 import './Auth.css';
 
 
-
-// const bg = {
-//     overlay: {
-//         background: '#3260a8'
-//     }
-// }
 
 type UserModel = {
     isManager: boolean,
@@ -64,13 +58,3 @@ export default class Auth extends Component<Props, State> {
         );
     }
 }
-
-/*
-      <Modal contentClassName='authModal' isOpen={true}>
-                <Button id='authBtn' onClick={() => this.toggleSignup()}>Create New User</Button>
-                <br />
-                <Button id='authBtn' onClick={() => this.toggleLogin()}>Employee Login</Button>
-                {this.state.signupOpen == true ? <Signup toggleSignup={this.toggleSignup} signupOpen={this.state.signupOpen} /> : <></>}
-                {this.state.loginOpen == true ? <Login updateToken={this.props.updateToken} updateUser={this.props.updateUser} toggleLogin={this.toggleLogin} loginOpen={this.state.loginOpen} /> : <></>}
-            </Modal>
-*/

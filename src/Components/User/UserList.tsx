@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 
 import API_URL from '../../env';
 import User from './User';
-
-import EmployeeModel from '../Models/EmployeeModel';
 
 import './user.css';
 
@@ -26,9 +24,6 @@ export default class UserList extends Component<Props, State> {
     }
     
     async getAllEmployees(){
-        // console.log('Running employee fetch');
-        // console.log('token:', localStorage.getItem('token'));
-        // const newToken = await localStorage.getItem('token');
         try{
             const url = `${API_URL}/user/all`;
             const options = {
@@ -36,7 +31,6 @@ export default class UserList extends Component<Props, State> {
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': this.props.token
-                    // 'Authorization': (newToken as string)
                 })
             };
 
@@ -59,10 +53,7 @@ export default class UserList extends Component<Props, State> {
 
     componentDidUpdate(prevProps: Props, prevState: State){
         if(prevState.employees != this.state.employees){
-            // console.log('prevState:', prevState.employees);
-            // console.log('curState:', this.state.employees);
             this.getAllEmployees();
-            // console.log('compUpdateToken:', this.props.token);
         }
     }
 

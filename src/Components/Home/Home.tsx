@@ -13,8 +13,6 @@ import UserList from '../User/UserList';
 import CustomerModel from '../Models/CustomerModel';
 import UserModel from '../Models/UserModel';
 
-import './Home.css';
-
 
 
 type Props = {
@@ -41,13 +39,13 @@ export default class Home extends Component<Props, State> {
 
     render() {
         return (
-            <Container fluid className='wasd'>
+            <Container fluid>
                 <Router>
-                    <Row className='mainRow'>
+                    <Row>
                         <Col sm='3'>
                             <Navbar logout={this.props.logout} user={this.props.user} />
                         </Col>
-                        <Col className='qwer' sm='9'>
+                        <Col sm='9'>
                             <Switch>
                                 {/* All Employees */}
                                 <Route exact path='/users/all'>
@@ -78,4 +76,3 @@ export default class Home extends Component<Props, State> {
         );
     }
 }
-
