@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Col} from 'reactstrap';
 
-import API_URL from '../../env';
 import CustomerEdit from './CustomerEdit';
 
 import CustomerModel from '../Models/CustomerModel';
@@ -56,7 +55,6 @@ export default class Customer extends Component<Props, State> {
                 {/* If the url isn't on order create, don't show the button */}
                 {window.location.href == 'http://localhost:3000/order/create' ?  <Button id='custBtn' color='primary' onClick={() => this.props.updateCustomer(customer)}>Select Customer</Button> : null}
                 {window.location.href == 'http://localhost:3000/customer/all' ? <Button id='custBtn' onClick={() => this.toggleCustomerEdit()}>Edit Customer Info</Button> : null}
-                {/* {window.location.href == `${API_URL}/customer/all` ? <Button onClick={() => this.toggleCustomerEdit()}>Edit Customer Info</Button> : null} */}
                 {this.state.editCustomerOn ? <CustomerEdit token={this.props.token} customer={this.props.customer} editCustomerOn={this.state.editCustomerOn} mapCustomers={this.props.mapCustomers} toggleCustomerEdit={this.toggleCustomerEdit} /> : null}
             </Col>
         );

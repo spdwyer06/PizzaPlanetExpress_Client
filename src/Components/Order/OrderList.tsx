@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row} from 'reactstrap';
 
 import API_URL from '../../env';
 import Order from './Order';
@@ -41,8 +41,6 @@ export default class OrderList extends Component<Props, State> {
     }
 
     async mapOrders(){
-        // console.log('OrderList Token:', this.props.token);
-
         try{
             const url = `${API_URL}/order/all`;
             const options = {
@@ -75,13 +73,6 @@ export default class OrderList extends Component<Props, State> {
         this.mapOrders();
     }
 
-    // componentDidUpdate(prevProps: Props, prevState: State){
-    //     if(prevState.orders.length != this.state.orders.length){
-    //         console.log('Stuff has changed');
-    //         this.mapOrders();
-    //     }
-    // }
-    
     toggleOrderCreate = () => this.setState({orderCreateOn: !this.state.orderCreateOn});
 
     setOrderId = (orderId: number) => this.setState({orderId: orderId});

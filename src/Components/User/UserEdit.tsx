@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, ModalFooter, Container, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, Container, Row, Col } from 'reactstrap';
 
 import API_URL from '../../env';
 import EmployeeModel from '../Models/EmployeeModel';
@@ -134,58 +134,3 @@ export default class UserEdit extends Component<Props, State> {
         );
     }
 }
-
-/*
-<Modal isOpen={this.props.editEmployeeOn}>
-                <ModalHeader>
-                    <Container>
-                        <Row>
-                            <Col sm='10'>
-                                <h3>Employee Edit</h3>
-                            </Col>
-                            <Col sm='2'>
-                            <Button onClick={this.props.toggleEditEmployeeOn} color='danger'>X</Button>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalHeader>
-                <Form onSubmit={(e) => this.submitForm(e)}>
-                    <ModalBody>
-                        <FormGroup>
-                            <Label for='itemId'>Employee Id: {employee.id}</Label>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for='employeeFirstName'>Employee First Name:</Label>
-                            <Input name='employeeFirstName' id='employeeFirstNameInput' required placeholder={employee.firstName} onChange={e => this.setState({updatedFirstName: e.target.value})} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for='employeeLastName'>Employee Last Name:</Label>
-                            <Input name='employeeLastName' id='employeeLastNameInput' required placeholder={employee.lastName} onChange={e => this.setState({updatedLastName: e.target.value})} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for='employeePassword'>Password:</Label>
-                            <Input name='employeePassword' id='employeePasswordInput' required placeholder={(employee.password).toString()} onChange={e => this.setState({updatedPassword: parseInt(e.target.value)})} />
-                        </FormGroup>
-                        <FormGroup>
-                            <Container>
-                                <Row>
-                                    <Col sm='6'>
-                                        <Label check>
-                                            <Input type='checkbox' name='isManager' defaultChecked={employee.isManager} onChange={e => this.setState({updatedIsManager: e.target.checked})} />{' Manager? '}
-                                        </Label>
-                                    </Col>
-                                    <Col sm='6'>
-                                        <Label check>
-                                            <Input type='checkbox' name='isAdmin' defaultChecked={employee.isAdmin} onChange={e => this.setState({updatedIsAdmin: e.target.checked})} />{' Admin? '}
-                                        </Label>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </FormGroup>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button type='submit'>Done</Button>
-                    </ModalFooter>
-                </Form>
-            </Modal>
-*/

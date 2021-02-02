@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalHeader, ModalFooter, Container, Row, Col } from 'reactstrap';
+import { Button, Modal, Container, Row, Col } from 'reactstrap';
 
 import API_URL from '../../env';
 import UserEdit from './UserEdit';

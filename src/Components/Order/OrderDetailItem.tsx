@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 
 import API_URL from '../../env';
 import MenuItemModel from "../Models/MenuItemModel";
@@ -45,8 +45,6 @@ export default class OrderDetailItem extends Component<Props, State> {
   }
 
   async updateOrderItem(e: React.MouseEvent){
-    //   e.preventDefault();
-    
       const menuItemName = await this.props.menuItem.name;
 
       try{
@@ -72,8 +70,6 @@ export default class OrderDetailItem extends Component<Props, State> {
       }
   }
 
-//   componentDidMount = async() => await this.setState({quantity: this.props.menuItem.orderItem.quantity})
-
   async componentDidMount(){
       console.log('Props:', this.props.menuItem.id);
 
@@ -82,13 +78,10 @@ export default class OrderDetailItem extends Component<Props, State> {
 
   async findNewTotal(){
       const newQuantity = this.state.quantity;
-    //   const originalQuantity = this.props.menuItem.orderItem.quantity;
       const itemPrice = this.props.menuItem.price;
       const originalPrice = this.props.orderPrice;
       const addingPrice = newQuantity * itemPrice;
       const newPrice = originalPrice + addingPrice;
-
-    //   return newPrice.toFixed(2);
 
     return `New Order Total: ${newPrice.toFixed(2)}`;
   }
@@ -142,47 +135,3 @@ export default class OrderDetailItem extends Component<Props, State> {
     );
   }
 }
-
-/*
-<div>
-            <Row key={menuItem.id}>
-                <Col>
-                    <pre>
-                        <h6>{menuItem.name} X {this.state.quantity}</h6>
-                    </pre>
-                </Col>
-                <Col>
-                    <pre>
-                        <h6>${(menuItem.price * this.state.quantity).toFixed(2)}</h6>
-                    </pre>
-                </Col>
-                <Col>
-                    <pre>
-                        <Button onClick={() => this.toggleEditItemOn()}>Edit</Button>
-                    </pre>
-                </Col>
-            </Row>
-            {this.state.editItemOn ? (
-                <div>
-
-                <Row>
-                    <Col sm='2'>
-                        {this.state.quantity > 0 ? <Button onClick={() => this.updateQuantity(-1)}>-</Button> : null}
-                    </Col>
-                    <Col sm='2' className='text-center'>
-                        <h1>{this.state.quantity}</h1>
-                    </Col>
-                    <Col sm='2'>
-                        <Button onClick={() => this.updateQuantity(1)}>+</Button>
-                    </Col>
-                    <Col sm='6'>
-                        <Button onClick={(e) => this.updateOrderItem(e)}>Done</Button>
-                    </Col>
-                </Row>
-                <Row>
-                    {this.state.quantity != this.props.menuItem.orderItem.quantity ? <h6>New Order Total: ${(this.props.orderPrice + ((this.state.quantity - menuItem.orderItem.quantity) * menuItem.price)).toFixed(2)}</h6> :null}
-                </Row>
-                </div>
-            ) : null}
-        </div>
-*/

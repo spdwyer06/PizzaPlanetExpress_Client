@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {Button, Row, Col} from 'reactstrap';
+import {Button, Col} from 'reactstrap';
 
 import EmployeeModel from '../Models/EmployeeModel';
 import UserDetail from './UserDetail';
 
 import './user.css';
+
+
 
 type Props = {
     token: string,

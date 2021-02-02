@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Modal, Label, Container, Row, Col, ModalHeader} from 'reactstrap';
+import {Button, Modal, Label, Container, Row, Col} from 'reactstrap';
 
 import Backspace from './backspace.png';
 import API_URL from '../../env';
@@ -36,7 +36,6 @@ export default class Login extends Component<Props, State> {
     
     async setPass(e: React.MouseEvent<HTMLElement>){
         const value = (e.target as HTMLButtonElement).value;
-        // console.log('Button Value:', value);
 
         await this.setState({
             password: this.state.password + value
